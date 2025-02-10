@@ -71,6 +71,13 @@ app.get("/listing/:id/edit",async(req,res)=>{
     res.render("listings/edit.ejs",{editListing});
 });
 
+// Update Route
+app.patch("/listing/:id",async(req,res)=>{
+    let {id} = req.params;
+    await listing.findByIdAndUpdate(id,{...req.body.listing});
+    res.redirect("/listing");
+})
+
 
 // Show Route
 app.get("/listing/:id",async(req,res)=>{
