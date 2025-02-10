@@ -23,15 +23,15 @@ app.get("/", (req, res) => {
     res.send("Hi, I am root");
 });
 
-app.get("/testListing",async(req,res)=>{
-    let sampleListing = new listing({
-        title: "My New Villa",
-        description: "Look the view",
-        price: 99,
-        location: "Bali",
-        country:"Indonesia"
-    });
-    await sampleListing.save();
-    console.log("sample was saved");
-    res.send("Successfull test");
-});
+// app.get("/testListing",async(req,res)=>{
+//     let sampleListing = new listing({
+//         title: "My New Villa",
+//         description: "Look the view",
+//         price: 99,
+//         location: "Bali",
+//         country:"Indonesia"
+//     });
+//     await sampleListing.save();
+//     console.log("sample was saved");
+//     res.send("Successfull test");
+// });
