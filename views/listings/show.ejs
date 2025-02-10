@@ -10,7 +10,7 @@
     <ul>
         <li><%= Listing.title %></li>
         <li><%= Listing.description %></li>
-        <li>&#8360; <%= Listing.price %></li>
+        <li>&#8360; <%= Listing.price.toLocaleString("ne-NP") %></li>
         <li><%= Listing.location %></li>
         <li><%= Listing.country %></li>
     </ul>
