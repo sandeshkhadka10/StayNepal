@@ -1,9 +1,13 @@
 const express = require("express");
 const app = express();
+const path = require("path");
 
 const mongoose = require("mongoose");
 
 const listing = require("./models/listing");
+
+app.set("view engine","ejs");
+app.set("views",path.join(__dirname,"views")); 
 
 main()
     .then(() => {
@@ -36,9 +40,7 @@ app.get("/", (req, res) => {
 //     res.send("Successfull test");
 // });
 
-app.get("/listing",(req,res)=>{
-    listing.find()
-       .then((res)=>{
-        console.log(res);
-       });
+app.get("/listing",async(req,res)=>{
+    let allListing = await listing.find();
+    res.render("./listings/index.ejs",{allListing});
 });
