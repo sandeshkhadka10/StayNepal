@@ -76,8 +76,14 @@ app.patch("/listing/:id",async(req,res)=>{
     let {id} = req.params;
     await listing.findByIdAndUpdate(id,{...req.body.listing});
     res.redirect(`/listing/${id}`);
-})
+});
 
+// Delete Route
+app.delete("/listing/:id",async(req,res)=>{
+    let {id} = req.params;
+    await listing.findByIdAndDelete(id);
+    res.redirect("/listing");
+});
 
 // Show Route
 app.get("/listing/:id",async(req,res)=>{
