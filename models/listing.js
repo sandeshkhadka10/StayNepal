@@ -2,13 +2,15 @@ const mongoose = require("mongoose");
 
 const listingSchema = new mongoose.Schema({
     title:{
-        type:String
+        type:String,
+        required:true
     },
     description:{
         type:String
     },
     image:{
         type:String
+        
     },
     price:{
         type:Number
