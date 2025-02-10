@@ -9,6 +9,8 @@ const listing = require("./models/listing");
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views")); 
 
+app.use(express.urlencoded({extended:true}));
+
 main()
     .then(() => {
         console.log("Connected Successfully");
@@ -42,5 +44,11 @@ app.get("/", (req, res) => {
 
 app.get("/listing",async(req,res)=>{
     let allListing = await listing.find();
-    res.render("./listings/index.ejs",{allListing});
+    res.render("listings/index.ejs",{allListing});
+});
+
+app.get("/listing/:id",async(req,res)=>{
+   let {id} = req.params;
+   const Listing = await listing.findById(id);
+   res.render("listings/show.ejs",{Listing});
 });
