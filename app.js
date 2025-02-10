@@ -3,7 +3,7 @@ const app = express();
 
 const mongoose = require("mongoose");
 
-const listing = require("../models/listing");
+const listing = require("./models/listing");
 
 main()
     .then(() => {
@@ -35,3 +35,10 @@ app.get("/", (req, res) => {
 //     console.log("sample was saved");
 //     res.send("Successfull test");
 // });
+
+app.get("/listing",(req,res)=>{
+    listing.find()
+       .then((res)=>{
+        console.log(res);
+       });
+});
