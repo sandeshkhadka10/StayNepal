@@ -3,7 +3,7 @@ const app = express();
 
 const mongoose = require("mongoose");
 
-const listing = require("./models/listing");
+const listing = require("../models/listing");
 
 main()
     .then(() => {
