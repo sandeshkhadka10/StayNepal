@@ -59,7 +59,16 @@ app.post("/listing",async(req,res)=>{
     // new listning(listing);
     await newListing.save();
     res.redirect("/listing");
-})
+});
+
+// Edit Route
+app.get("/listing/:id/edit",async(req,res)=>{
+    let {id} = req.params;
+    let editListing = await listing.findById(id);
+    res.render("listings/edit.ejs",{editListing});
+});
+
+
 // Show Route
 app.get("/listing/:id",async(req,res)=>{
    let {id} = req.params;
