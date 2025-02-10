@@ -6,7 +6,9 @@
     <title>BookMeNow</title>
 </head>
 <body>
-    <h3>All Listing</h3>
-    
+    <h3>All Listing</h3>\
+    <% for(let listing of allListing){%>
+        <li><a href="/listing/<%= listing._id %>"><%= listing.title %></a></li>
+    <%}%>
 </body>
 </html>
