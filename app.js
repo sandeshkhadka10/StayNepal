@@ -42,11 +42,18 @@ app.get("/", (req, res) => {
 //     res.send("Successfull test");
 // });
 
+// Index Route
 app.get("/listing",async(req,res)=>{
     let allListing = await listing.find();
     res.render("listings/index.ejs",{allListing});
 });
 
+// New Route
+app.get("/listing/new",(req,res)=>{
+    res.render("listings/new.ejs");
+});
+
+// Show Route
 app.get("/listing/:id",async(req,res)=>{
    let {id} = req.params;
    const Listing = await listing.findById(id);
