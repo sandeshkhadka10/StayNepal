@@ -7,10 +7,10 @@
 </head>
 <body>
     <h3>Edit the existing listing</h3>
-    <form method="post" action="/listing/<%= listing.id?_method=PATCH">
+    <form method="post" action="/listing/<%= editListing.id %>">
         <input type="text" name="listing[title]" value="<%= editListing.title %>">
         <br><br>
-        <textarea name="listing[description]" value="<%= editListing.description %>"></textarea>
+        <textarea name="listing[description]"><%= editListing.description %></textarea>
         <br><br>
         <input name="listing[image]" value="<%= editListing.image %>">
         <br><br>
