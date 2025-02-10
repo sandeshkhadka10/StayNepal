@@ -75,7 +75,7 @@ app.get("/listing/:id/edit",async(req,res)=>{
 app.patch("/listing/:id",async(req,res)=>{
     let {id} = req.params;
     await listing.findByIdAndUpdate(id,{...req.body.listing});
-    res.redirect("/listing");
+    res.redirect(`/listing/${id}`);
 })
 
 
