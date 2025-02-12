@@ -1,6 +1,6 @@
-/* body{
-    background: pink;
-} */
+body{
+    font-family: "Plus Jakarta Sans", serif;
+}
 
 /* Navbar */
 nav{
@@ -50,4 +50,10 @@ nav{
     border-radius: 1rem !important;
     width: 100% !important;
     object-fit: cover !important;
+}
+.card-body{
+    padding: 0 !important;
+}
+.card-text p{
+
 }
