@@ -17,18 +17,21 @@ nav{
 
 /* Footer */
 .f-info{
-    display: flex;
+    text-align: center;
     height: 8 rem;
     background: #ebebeb;
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-content: space-evenly;
+    align-content: center;
 }
-.f-info-socials{
+.f-info-socials, .f-info-links,.f-info-brand{
     width: 100%;
 }
-.f-info-links{
-    width: 100%;
+.f-info-socials i{
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+    margin-right: 0.8rem;
 }
 .f-info-links a{
     text-decoration: none;
