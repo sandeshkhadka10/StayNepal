@@ -1,5 +1,5 @@
 body{
-    font-family: "Plus Jakarta Sans", serif;
+    font-family: "Plus Jakarta Sans", serif !important;
 }
 
 /* Navbar */
@@ -55,5 +55,6 @@ nav{
     padding: 0 !important;
 }
 .card-text p{
+    font-weight: 400 !important;
 
 }
