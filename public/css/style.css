@@ -40,3 +40,14 @@ nav{
 .f-info-links a:hover{
     text-decoration: underline;
 }
+
+/* Cards */
+.card{
+    border: none !important;
+    margin: 2 rem;
+}
+.card-img-top{
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
