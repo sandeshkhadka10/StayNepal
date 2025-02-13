@@ -58,3 +58,15 @@ nav{
     font-weight: 400 !important;
 
 }
+.listing-link{
+    text-decoration: none;
+}
+
+/* Card Effect */
+.card-img-overlay{
+    opacity: 0;
+}
+.card-img-overlay:hover{
+    opacity: 0.2;
+    background: white;
+}
