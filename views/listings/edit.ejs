@@ -8,19 +8,41 @@
 <body>
     <h3>Edit the existing listing</h3>
     <form method="post" action="/listing/<%= editListing.id %>?_method=PATCH">
-        <input type="text" name="listing[title]" value="<%= editListing.title %>">
-        <br><br>
-        <textarea name="listing[description]"><%= editListing.description %></textarea>
-        <br><br>
-        <input name="listing[image]" value="<%= editListing.image %>">
-        <br><br>
-        <input type="number" name="listing[price]" value="<%= editListing.price %>">
-        <br><br>
-        <input type="text" name="listing[location]" value="<%= editListing.location %>">
-        <br><br>
-        <input type="text" name="listing[country]" value="<%= editListing.country %>">
-        <br><br>
-        <button>Edit</button>
+
+        <div>
+            <label for="title" class="form-label">Title</label>
+            <input type="text" name="listing[title]" value="<%= editListing.title %>">
+        </div>
+        
+        <div>
+            <label for="description" class="form-label"></label>
+            <textarea name="listing[description]"><%= editListing.description %></textarea>
+        </div>
+        
+        <div>
+            <label class="image" class="form-label">Image</label>
+            <input name="listing[image]" value="<%= editListing.image %>">
+        </div>
+        
+        <div>
+            <label for="price" class="form-label">Price</label>
+            <input type="number" name="listing[price]" value="<%= editListing.price %>">
+        </div>
+        
+        <div>
+            <label for="location" class="form-label">Location</label>
+            <input type="text" name="listing[location]" value="<%= editListing.location %>">
+        </div>
+        
+        <div>
+            <label for="country" class="form-label">Country</label>
+            <input type="text" name="listing[country]" value="<%= editListing.country %>">
+        </div>
+        
+        <div>
+            <button class="btn btn-dark">Edit</button>
+        </div>
+        
     </form>
     
 </body>
