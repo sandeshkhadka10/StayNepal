@@ -43,6 +43,38 @@
             <button class="btn btn-dark">Edit</button>
         </div>
         
+</div>
+
+<div>
+    <label for="description" class="form-label">Description</label>
+    <textarea name="listing[description]" required><%= editListing.description %></textarea>
+</div>
+
+<div>
+    <label class="image" class="form-label">Image</label>
+    <input type="url" name="listing[image]" value="<%= editListing.image %>">
+</div>
+
+<div>
+    <label for="price" class="form-label">Price</label>
+    <input type="number" name="listing[price]" value="<%= editListing.price %>" required min="0" step="0.01">
+</div>
+
+<div>
+    <label for="location" class="form-label">Location</label>
+    <input type="text" name="listing[location]" value="<%= editListing.location %>" required>
+</div>
+
+<div>
+    <label for="country" class="form-label">Country</label>
+    <input type="text" name="listing[country]" value="<%= editListing.country %>" required>
+</div>
+
+<div>
+    <button class="btn btn-dark" type="submit">Edit</button>
+    <button class="btn btn-secondary" type="reset">Reset</button>
+</div>
+        
     </form>
     
 </body>
