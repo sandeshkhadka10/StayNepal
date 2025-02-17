@@ -8,12 +8,12 @@ const mongoose = require("mongoose");
 
 const listing = require("./models/listing");
 
-app.set("view engine","ejs");
-app.set("views",path.join(__dirname,"views")); 
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
-app.use(express.static(path.join(__dirname,"public")));
+app.use(express.static(path.join(__dirname, "public")));
 
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 
 app.use(methodOverride('_method'));
 
@@ -51,48 +51,59 @@ app.get("/", (req, res) => {
 // });
 
 // Index Route
-app.get("/listing",async(req,res)=>{
+app.get("/listing", async (req, res) => {
     let allListing = await listing.find();
-    res.render("listings/index.ejs",{allListing});
+    res.render("listings/index.ejs", { allListing });
 });
 
 // New Route
-app.get("/listing/new",(req,res)=>{
+app.get("/listing/new", (req, res) => {
     res.render("listings/new.ejs");
 });
 
 // Create Route
-app.post("/listing",async(req,res)=>{
-    const newListing = new listing(req.body.listing);
-    // new listning(listing);
-    await newListing.save();
-    res.redirect("/listing");
+app.post("/listing", async (req, res) => {
+    try {
+        const newListing = new listing(req.body.listing);
+        // new listning(listing);
+        await newListing.save();
+        res.redirect("/listing");
+    }catch(err){
+        next(err);
+    }
 });
 
 // Edit Route
-app.get("/listing/:id/edit",async(req,res)=>{
-    let {id} = req.params;
+app.get("/listing/:id/edit", async (req, res) => {
+    let { id } = req.params;
     let editListing = await listing.findById(id);
-    res.render("listings/edit.ejs",{editListing});
+    res.render("listings/edit.ejs", { editListing });
 });
 
 // Update Route
-app.patch("/listing/:id",async(req,res)=>{
-    let {id} = req.params;
-    await listing.findByIdAndUpdate(id,{...req.body.listing});
+app.patch("/listing/:id", async (req, res) => {
+    let { id } = req.params;
+    await listing.findByIdAndUpdate(id, { ...req.body.listing });
     res.redirect(`/listing/${id}`);
 });
 
 // Delete Route
-app.delete("/listing/:id",async(req,res)=>{
-    let {id} = req.params;
+app.delete("/listing/:id", async (req, res) => {
+    let { id } = req.params;
     await listing.findByIdAndDelete(id);
     res.redirect("/listing");
 });
 
 // Show Route
-app.get("/listing/:id",async(req,res)=>{
-   let {id} = req.params;
-   const Listing = await listing.findById(id);
-   res.render("listings/show.ejs",{Listing});
+app.get("/listing/:id", async (req, res) => {
+    let { id } = req.params;
+    const Listing = await listing.findById(id);
+    res.render("listings/show.ejs", { Listing });
 });
+
+// custom error handler
+app.use((err, req, res, next) => {
+    res.send("Something went wrong");
+    // let{status,message} = err;
+    // res.status(status).send(message);
+})
