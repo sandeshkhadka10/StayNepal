@@ -12,14 +12,14 @@
         
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
-                        <input type="text" name="listing[title]" value="<%= editListing.title %>" class="form-control">
+                        <input type="text" name="listing[title]" value="<%= editListing.title %>" class="form-control" required>
                         <div class="valid-feedback">Title Looks Good</div>
                         <div class="invalid-feedback">Please Fill Up Title</div>
                     </div>
         
                     <div class="mb-3">
                         <label for="description" class="form-label"></label>
-                        <textarea name="listing[description]" class="form-control"><%= editListing.description %></textarea>
+                        <textarea name="listing[description]" class="form-control" required><%= editListing.description %></textarea>
                         <div class="valid-feedback">Description Looks Good</div>
                         <div class="invalid-feedback">Please Fill Up description</div>
                     </div>
@@ -33,14 +33,14 @@
 
                         <div class="mb-3 col-md-4">
                             <label for="price" class="form-label">Price</label>
-                            <input type="number" name="listing[price]" value="<%= editListing.price %>" class="form-control">
+                            <input type="number" name="listing[price]" value="<%= editListing.price %>" class="form-control" required>
                             <div class="valid-feedback">Valid Amount</div>
                             <div class="invalid-feedback">Please Fill Up Price</div>
                         </div>
             
                         <div class="mb-3 col-md-8">
                             <label for="location" class="form-label">Location</label>
-                            <input type="text" name="listing[location]" value="<%= editListing.location %>" class="form-control">
+                            <input type="text" name="listing[location]" value="<%= editListing.location %>" class="form-control" required>
                             <div class="valid-feedback">Valid Location</div>
                             <div class="invalid-feedback">Please Fill Up Location</div>
                         </div>
@@ -50,7 +50,7 @@
         
                     <div class="mb-3">
                         <label for="country" class="form-label">Country</label>
-                        <input type="text" name="listing[country]" value="<%= editListing.country %>" class="form-control">
+                        <input type="text" name="listing[country]" value="<%= editListing.country %>" class="form-control" required>
                         <div class="valid-feedback">Valid Country</div>
                         <div class="invalid-feedback">Please Fill Up Country</div>
                     </div>
