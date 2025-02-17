@@ -3,7 +3,7 @@ const app = express();
 const path = require("path");
 const methodOverride = require('method-override');
 const ejsMate = require("ejs-mate");
-const wrapAsync = require("./utils/wrapAsync");
+const wrapAsync = require("./utils/wrapAsync.js");
 
 const mongoose = require("mongoose");
 
