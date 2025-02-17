@@ -1,6 +1,6 @@
 <% layout("/layouts/boilerplate") %>
 <body>
-        <form method="post" action="/listing/<%= editListing.id %>?_method=PATCH">
+        <form method="post" action="/listing/<%= editListing.id %>?_method=PATCH" class="needs-validation" novalidate>
 
             <div class="row">
 
@@ -13,11 +13,15 @@
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
                         <input type="text" name="listing[title]" value="<%= editListing.title %>" class="form-control">
+                        <div class="valid-feedback">Title Looks Good</div>
+                        <div class="invalid-feedback">Please Fill Up Title</div>
                     </div>
         
                     <div class="mb-3">
                         <label for="description" class="form-label"></label>
                         <textarea name="listing[description]" class="form-control"><%= editListing.description %></textarea>
+                        <div class="valid-feedback">Description Looks Good</div>
+                        <div class="invalid-feedback">Please Fill Up description</div>
                     </div>
         
                     <div class="mb-3">
@@ -30,11 +34,15 @@
                         <div class="mb-3 col-md-4">
                             <label for="price" class="form-label">Price</label>
                             <input type="number" name="listing[price]" value="<%= editListing.price %>" class="form-control">
+                            <div class="valid-feedback">Valid Amount</div>
+                            <div class="invalid-feedback">Please Fill Up Price</div>
                         </div>
             
                         <div class="mb-3 col-md-8">
                             <label for="location" class="form-label">Location</label>
                             <input type="text" name="listing[location]" value="<%= editListing.location %>" class="form-control">
+                            <div class="valid-feedback">Valid Location</div>
+                            <div class="invalid-feedback">Please Fill Up Location</div>
                         </div>
 
                     </div>
@@ -43,6 +51,8 @@
                     <div class="mb-3">
                         <label for="country" class="form-label">Country</label>
                         <input type="text" name="listing[country]" value="<%= editListing.country %>" class="form-control">
+                        <div class="valid-feedback">Valid Country</div>
+                        <div class="invalid-feedback">Please Fill Up Country</div>
                     </div>
         
                     <div class="mb-3">
