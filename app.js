@@ -3,6 +3,7 @@ const app = express();
 const path = require("path");
 const methodOverride = require('method-override');
 const ejsMate = require("ejs-mate");
+const wrapAsync = require("./utils/wrapAsync");
 
 const mongoose = require("mongoose");
 
@@ -62,16 +63,12 @@ app.get("/listing/new", (req, res) => {
 });
 
 // Create Route
-app.post("/listing", async (req,res,next) => {
-    try {
+app.post("/listing", wrapAsync(async (req,res,next) => {
         const newListing = new listing(req.body.listing);
         // new listning(listing);
         await newListing.save();
         res.redirect("/listing");
-    }catch(err){
-        next(err);
-    }
-});
+}));
 
 // Edit Route
 app.get("/listing/:id/edit", async (req, res) => {
