@@ -62,7 +62,7 @@ app.get("/listing/new", (req, res) => {
 });
 
 // Create Route
-app.post("/listing", async (req, res) => {
+app.post("/listing", async (req,res,next) => {
     try {
         const newListing = new listing(req.body.listing);
         // new listning(listing);
