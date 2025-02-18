@@ -65,10 +65,13 @@ app.get("/listing/new", (req, res) => {
 
 // Create Route
 app.post("/listing", wrapAsync(async (req,res,next) => {
-        const newListing = new listing(req.body.listing);
-        // new listning(listing);
-        await newListing.save();
-        res.redirect("/listing");
+    if(!req.body.listing){
+        throw ExpressError(400,"Send valid data for listing");
+    }
+    const newListing = new listing(req.body.listing);
+    // new listning(listing);
+    await newListing.save();
+    res.redirect("/listing");
 }));
 
 // Edit Route
@@ -80,6 +83,9 @@ app.get("/listing/:id/edit", wrapAsync(async (req, res) => {
 
 // Update Route
 app.patch("/listing/:id", wrapAsync(async (req, res) => {
+    if(!req.body.listing){
+        throw new ExpressError("Send valid data for listing");
+    }
     let { id } = req.params;
     await listing.findByIdAndUpdate(id, { ...req.body.listing });
     res.redirect(`/listing/${id}`);
