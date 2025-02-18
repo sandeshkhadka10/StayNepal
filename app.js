@@ -4,6 +4,7 @@ const path = require("path");
 const methodOverride = require('method-override');
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
+const ExpressError = require("./utils/ExpressError.js");
 
 const mongoose = require("mongoose");
 
@@ -100,7 +101,6 @@ app.get("/listing/:id", async (req, res) => {
 
 // custom error handler
 app.use((err, req, res, next) => {
-    res.send("Something went wrong");
-    // let{status,message} = err;
-    // res.status(status).send(message);
+    let{status,message} = err;
+    res.status(status).send(message);
 })
