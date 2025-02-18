@@ -5,6 +5,7 @@ const methodOverride = require('method-override');
 const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
+const {listingSchema} = require("./schema.js");
 
 const mongoose = require("mongoose");
 
@@ -65,25 +66,9 @@ app.get("/listing/new", (req, res) => {
 
 // Create Route
 app.post("/listing", wrapAsync(async (req,res,next) => {
-    if(!req.body.listing){
-        throw new ExpressError(400,"Send valid data for listing");
-    }
+    let result = listingSchema.validate(req.body);
+    console.log(result);
     const newListing = new listing(req.body.listing);
-    if(!newListing.title){
-        throw new ExpressError(400,"Please Fill Up title");
-    }
-    if(!newListing.description){
-        throw new ExpressError(400,"Please Fill Up description");
-    }
-    if(!newListing.price){
-        throw new ExpressError(400,"Please Fill Up price");
-    }
-    if(!newListing.location){
-        throw new ExpressError(400,"Please Fill Up location");
-    }
-    if(!newListing.country){
-        throw new ExpressError(400,"Please Fill Up country");
-    }
     await newListing.save();
     res.redirect("/listing");
 }));
@@ -127,6 +112,5 @@ app.all("*",(req,res,next)=>{
 // custom error handler
 app.use((err, req, res, next) => {
     let{status = 500,message = "Something went wrong"} = err;
-    // res.status(status).send(message);
     res.status(status).render("error.ejs",{message})
 });
