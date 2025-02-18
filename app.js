@@ -101,7 +101,7 @@ app.get("/listing/:id", async (req, res) => {
 
 // It is done if somebody gives random url
 app.all("*",(req,res,next)=>{
-    next(new ExpressError("Page not found!"));
+    next(new ExpressError(404,"Page not found!"));
 });
 
 // custom error handler
