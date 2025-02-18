@@ -99,8 +99,13 @@ app.get("/listing/:id", async (req, res) => {
     res.render("listings/show.ejs", { Listing });
 });
 
+// It is done if somebody gives random url
+app.all("*",(req,res,next)=>{
+    next(new ExpressError("Page not found!"));
+});
+
 // custom error handler
 app.use((err, req, res, next) => {
     let{status,message} = err;
     res.status(status).send(message);
-})
+});
