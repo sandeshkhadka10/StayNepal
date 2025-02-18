@@ -66,10 +66,24 @@ app.get("/listing/new", (req, res) => {
 // Create Route
 app.post("/listing", wrapAsync(async (req,res,next) => {
     if(!req.body.listing){
-        throw ExpressError(400,"Send valid data for listing");
+        throw new ExpressError(400,"Send valid data for listing");
     }
     const newListing = new listing(req.body.listing);
-    // new listning(listing);
+    if(!newListing.title){
+        throw new ExpressError(400,"Please Fill Up title");
+    }
+    if(!newListing.description){
+        throw new ExpressError(400,"Please Fill Up description");
+    }
+    if(!newListing.price){
+        throw new ExpressError(400,"Please Fill Up price");
+    }
+    if(!newListing.location){
+        throw new ExpressError(400,"Please Fill Up location");
+    }
+    if(!newListing.country){
+        throw new ExpressError(400,"Please Fill Up country");
+    }
     await newListing.save();
     res.redirect("/listing");
 }));
