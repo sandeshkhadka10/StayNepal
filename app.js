@@ -113,5 +113,6 @@ app.all("*",(req,res,next)=>{
 // custom error handler
 app.use((err, req, res, next) => {
     let{status = 500,message = "Something went wrong"} = err;
-    res.status(status).send(message);
+    // res.status(status).send(message);
+    res.render("error.ejs");
 });
