@@ -53,10 +53,10 @@ app.get("/", (req, res) => {
 // });
 
 // Index Route
-app.get("/listing", async (req, res) => {
+app.get("/listing", wrapAsync(async (req, res) => {
     let allListing = await listing.find();
     res.render("listings/index.ejs", { allListing });
-});
+}));
 
 // New Route
 app.get("/listing/new", (req, res) => {
@@ -72,32 +72,32 @@ app.post("/listing", wrapAsync(async (req,res,next) => {
 }));
 
 // Edit Route
-app.get("/listing/:id/edit", async (req, res) => {
+app.get("/listing/:id/edit", wrapAsync(async (req, res) => {
     let { id } = req.params;
     let editListing = await listing.findById(id);
     res.render("listings/edit.ejs", { editListing });
-});
+}));
 
 // Update Route
-app.patch("/listing/:id", async (req, res) => {
+app.patch("/listing/:id", wrapAsync(async (req, res) => {
     let { id } = req.params;
     await listing.findByIdAndUpdate(id, { ...req.body.listing });
     res.redirect(`/listing/${id}`);
-});
+}));
 
 // Delete Route
-app.delete("/listing/:id", async (req, res) => {
+app.delete("/listing/:id", wrapAsync(async (req, res) => {
     let { id } = req.params;
     await listing.findByIdAndDelete(id);
     res.redirect("/listing");
-});
+}));
 
 // Show Route
-app.get("/listing/:id", async (req, res) => {
+app.get("/listing/:id", wrapAsync(async (req, res) => {
     let { id } = req.params;
     const Listing = await listing.findById(id);
     res.render("listings/show.ejs", { Listing });
-});
+}));
 
 // It is done if somebody gives random url
 app.all("*",(req,res,next)=>{
@@ -106,6 +106,6 @@ app.all("*",(req,res,next)=>{
 
 // custom error handler
 app.use((err, req, res, next) => {
-    let{status,message} = err;
+    let{status = 500,message = "Something went wrong"} = err;
     res.status(status).send(message);
 });
