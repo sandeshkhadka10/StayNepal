@@ -118,7 +118,7 @@ app.post("/listing/:id/reviews",validateReview,wrapAsync(async(req,res)=>{
     Listing.reviews.push(newReview); //yoh reviews bhaneko chai array ho jun listingSchema bitra cha
     await newReview.save();
     await Listing.save();
-    console.log("New Review Saved");
+    // console.log("New Review Saved");
     // res.send("New Review Saved");
     res.redirect(`/listing/${id}`);
 }));
