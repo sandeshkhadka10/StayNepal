@@ -3,24 +3,22 @@ const app = express();
 const path = require("path");
 const methodOverride = require('method-override');
 const ejsMate = require("ejs-mate");
+
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
+
 const {listingSchema} = require("./schema.js");
+const {reviewSchema} = require("./schema.js");
 
 const mongoose = require("mongoose");
-
 const listing = require("./models/listing");
 const review = require("./models/review.js");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-
 app.use(express.static(path.join(__dirname, "public")));
-
 app.use(express.urlencoded({ extended: true }));
-
 app.use(methodOverride('_method'));
-
 app.engine('ejs', ejsMate);
 
 main()
@@ -41,8 +39,18 @@ app.get("/", (req, res) => {
     res.send("Hi, I am root");
 });
 
+// It is done for the server side validation
 const validateListing = (req,res,next)=>{
     let {error} = listingSchema.validate(req.body);
+    if(error){
+        let errMsg = error.details.map((el)=> el.message).join(",");
+        throw new ExpressError(400,errMsg);
+    }else{
+        next();
+    }
+}
+const validateReview = (req,res,next)=>{
+    let {error} = reviewSchema.validate(req.body);
     if(error){
         let errMsg = error.details.map((el)=> el.message).join(",");
         throw new ExpressError(400,errMsg);
@@ -103,7 +111,7 @@ app.delete("/listing/:id", wrapAsync(async (req, res) => {
 }));
 
 // Reviews Route
-app.post("/listing/:id/reviews",async(req,res)=>{
+app.post("/listing/:id/reviews",validateReview,wrapAsync(async(req,res)=>{
     let {id} = req.params;
     let Listing = await listing.findById(id);
     let newReview = new review(req.body.review);
@@ -113,8 +121,7 @@ app.post("/listing/:id/reviews",async(req,res)=>{
     console.log("New Review Saved");
     // res.send("New Review Saved");
     res.redirect(`/listing/${id}`);
-
-});
+}));
 
 // Show Route
 app.get("/listing/:id", wrapAsync(async (req, res) => {
