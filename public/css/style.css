@@ -48,7 +48,7 @@ nav{
 }
 
 /* Cards */
-.card{
+.listing-card{
     border: none !important;
     margin: 2 rem;
 }
