@@ -10,6 +10,7 @@ const {listingSchema} = require("./schema.js");
 const mongoose = require("mongoose");
 
 const listing = require("./models/listing");
+const review = require("./models/review.js");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -100,6 +101,19 @@ app.delete("/listing/:id", wrapAsync(async (req, res) => {
     await listing.findByIdAndDelete(id);
     res.redirect("/listing");
 }));
+
+// Reviews Route
+app.post("/listing/:id/reviews",async(req,res)=>{
+    let {id} = req.params;
+    let Listing = await listing.findById(id);
+    let newReview = new review(req.body.review);
+    Listing.reviews.push(newReview); //yoh reviews bhaneko chai array ho jun listingSchema bitra cha
+    await newReview.save();
+    await Listing.save();
+    console.log("New Review Saved");
+    res.send("New Review Saved");
+
+});
 
 // Show Route
 app.get("/listing/:id", wrapAsync(async (req, res) => {
