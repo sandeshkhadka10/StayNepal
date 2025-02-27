@@ -14,6 +14,8 @@ const mongoose = require("mongoose");
 const listing = require("./models/listing");
 const review = require("./models/review.js");
 
+const listings = require("./routes/listing.js");
+
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
@@ -35,20 +37,11 @@ app.listen(8080, () => {
     console.log("Server is listening to port 8080");
 });
 
-app.get("/", (req, res) => {
-    res.send("Hi, I am root");
-});
+// app.get("/", (req, res) => {
+//     res.send("Hi, I am root");
+// });
 
-// It is done for the server side validation
-const validateListing = (req,res,next)=>{
-    let {error} = listingSchema.validate(req.body);
-    if(error){
-        let errMsg = error.details.map((el)=> el.message).join(",");
-        throw new ExpressError(400,errMsg);
-    }else{
-        next();
-    }
-}
+
 const validateReview = (req,res,next)=>{
     let {error} = reviewSchema.validate(req.body);
     if(error){
@@ -58,6 +51,10 @@ const validateReview = (req,res,next)=>{
         next();
     }
 }
+
+app.use("/listing",listings);
+
+
 // app.get("/testListing",async(req,res)=>{
 //     let sampleListing = new listing({
 //         title: "My New Villa",
@@ -71,44 +68,7 @@ const validateReview = (req,res,next)=>{
 //     res.send("Successfull test");
 // });
 
-// Index Route
-app.get("/listing", wrapAsync(async (req, res) => {
-    let allListing = await listing.find();
-    res.render("listings/index.ejs", { allListing });
-}));
 
-// New Route
-app.get("/listing/new", (req, res) => {
-    res.render("listings/new.ejs");
-});
-
-// Create Route
-app.post("/listing", validateListing, wrapAsync(async (req,res,next) => {
-    const newListing = new listing(req.body.listing);
-    await newListing.save();
-    res.redirect("/listing");
-}));
-
-// Edit Route
-app.get("/listing/:id/edit", wrapAsync(async (req, res) => {
-    let { id } = req.params;
-    let editListing = await listing.findById(id);
-    res.render("listings/edit.ejs", { editListing });
-}));
-
-// Update Route
-app.patch("/listing/:id", validateListing, wrapAsync(async (req, res) => {
-    let { id } = req.params;
-    await listing.findByIdAndUpdate(id, { ...req.body.listing });
-    res.redirect(`/listing/${id}`);
-}));
-
-// Delete Route
-app.delete("/listing/:id", wrapAsync(async (req, res) => {
-    let { id } = req.params;
-    await listing.findByIdAndDelete(id);
-    res.redirect("/listing");
-}));
 
 // Post Reviews Route
 app.post("/listing/:id/reviews",validateReview,wrapAsync(async(req,res)=>{
@@ -132,12 +92,7 @@ app.delete("/listing/:id/reviews/:reviewId",async(req,res)=>{
     res.redirect(`/listing/${id}`);
 });
 
-// Show Route
-app.get("/listing/:id", wrapAsync(async (req, res) => {
-    let { id } = req.params;
-    const Listing = await listing.findById(id).populate("reviews");
-    res.render("listings/show.ejs", { Listing });
-}));
+
 
 // It is done if somebody gives random url
 app.all("*",(req,res,next)=>{
