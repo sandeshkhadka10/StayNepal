@@ -15,6 +15,7 @@ const listing = require("./models/listing");
 const review = require("./models/review.js");
 
 const listings = require("./routes/listing.js");
+const reviews = require("./routes/review.js");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -42,17 +43,10 @@ app.listen(8080, () => {
 // });
 
 
-const validateReview = (req,res,next)=>{
-    let {error} = reviewSchema.validate(req.body);
-    if(error){
-        let errMsg = error.details.map((el)=> el.message).join(",");
-        throw new ExpressError(400,errMsg);
-    }else{
-        next();
-    }
-}
+
 
 app.use("/listing",listings);
+app.use("/listing/:id/review",reviews);
 
 
 // app.get("/testListing",async(req,res)=>{
@@ -70,27 +64,7 @@ app.use("/listing",listings);
 
 
 
-// Post Reviews Route
-app.post("/listing/:id/reviews",validateReview,wrapAsync(async(req,res)=>{
-    let {id} = req.params;
-    let Listing = await listing.findById(id);
-    let newReview = new review(req.body.review);
-    Listing.reviews.push(newReview); //yoh reviews bhaneko chai array ho jun listingSchema bitra cha
-    await newReview.save();
-    await Listing.save();
-    // console.log("New Review Saved");
-    // res.send("New Review Saved");
-    res.redirect(`/listing/${id}`);
-}));
 
-// Delete Review Route
-app.delete("/listing/:id/reviews/:reviewId",async(req,res)=>{
-    let {id} = req.params;
-    let {reviewId} = req.params;
-    await listing.findByIdAndUpdate(id,{$pull:{reviews: reviewId}});
-    await review.findByIdAndDelete(reviewId);
-    res.redirect(`/listing/${id}`);
-});
 
 
 
