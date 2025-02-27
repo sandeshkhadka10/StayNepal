@@ -19,11 +19,15 @@ const validateReview = (req,res,next)=>{
 // Post Reviews Route
 router.post("/",validateReview,wrapAsync(async(req,res)=>{
     let {id} = req.params;
+
     let Listing = await listing.findById(id);
     let newReview = new review(req.body.review);
+
     Listing.reviews.push(newReview); //yoh reviews bhaneko chai array ho jun listingSchema bitra cha
+
     await newReview.save();
     await Listing.save();
+    
     // console.log("New Review Saved");
     // res.send("New Review Saved");
     res.redirect(`/listing/${id}`);
