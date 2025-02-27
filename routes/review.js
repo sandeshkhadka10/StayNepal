@@ -3,6 +3,7 @@ const router = express.Router();
 const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/ExpressError.js");
 const {reviewSchema} = require("../schema.js");
+const listing = require("../models/listing");
 const review = require("../models/review.js");
 
 const validateReview = (req,res,next)=>{
