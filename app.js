@@ -44,7 +44,7 @@ app.listen(8080, () => {
 // });
 
 app.use("/listing",listings);
-app.use("/listing/:id/review",reviews);
+app.use("/listing/:id/reviews",reviews);
 
 
 // app.get("/testListing",async(req,res)=>{

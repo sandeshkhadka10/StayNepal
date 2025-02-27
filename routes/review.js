@@ -20,6 +20,8 @@ const validateReview = (req,res,next)=>{
 router.post("/",validateReview,wrapAsync(async(req,res)=>{
     let {id} = req.params;
 
+    console.log(req.params.id);
+
     let Listing = await listing.findById(id);
     let newReview = new review(req.body.review);
 
@@ -27,7 +29,7 @@ router.post("/",validateReview,wrapAsync(async(req,res)=>{
 
     await newReview.save();
     await Listing.save();
-    
+
     // console.log("New Review Saved");
     // res.send("New Review Saved");
     res.redirect(`/listing/${id}`);
