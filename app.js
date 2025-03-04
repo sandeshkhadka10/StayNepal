@@ -13,6 +13,7 @@ const mongoose = require("mongoose");
 const listings = require("./routes/listing.js");
 const reviews = require("./routes/review.js");
 const session = require("express-session");
+const flash = require("connect-flash");
 
 app.listen(8080, () => {
     console.log("Server is listening to port 8080");
@@ -46,12 +47,20 @@ const sessionOptions = ({
         httpOnly: true
     }
 });
-app.use(session(sessionOptions));
 
 app.get("/", (req, res) => {
     res.send("Hi, I am root");
 });
+ 
+app.use(session(sessionOptions));
+app.use(flash());
 
+app.use((req,res,next)=>{
+    res.locals.success = req.flash("success");
+    next();
+});
+
+// route bhanda aagadi nai session rah flash lignu parcha
 app.use("/listing",listings);
 app.use("/listing/:id/reviews",reviews);
 
