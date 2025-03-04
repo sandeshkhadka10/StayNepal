@@ -46,6 +46,7 @@ router.get("/:id/edit", wrapAsync(async (req, res) => {
 router.patch("/:id", validateListing, wrapAsync(async (req, res) => {
     let { id } = req.params;
     await listing.findByIdAndUpdate(id, { ...req.body.listing });
+    req.flash("success","Listing Updated!");
     res.redirect(`/listing/${id}`);
 }));
 
@@ -53,6 +54,7 @@ router.patch("/:id", validateListing, wrapAsync(async (req, res) => {
 router.delete("/:id", wrapAsync(async (req, res) => {
     let { id } = req.params;
     await listing.findByIdAndDelete(id);
+    req.flash("success","Listing Deleted!");
     res.redirect("/listing");
 }));
 
