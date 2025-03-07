@@ -10,8 +10,9 @@ const ExpressError = require("./utils/ExpressError.js");
 const mongoose = require("mongoose");
 // const listing = require("./models/listing");
 // const review = require("./models/review.js");
-const listings = require("./routes/listing.js");
-const reviews = require("./routes/review.js");
+const listingsRouter = require("./routes/listing.js");
+const reviewsRouter = require("./routes/review.js");
+const userRouter = require("./routes/user.js");
 const session = require("express-session");
 const flash = require("connect-flash");
 const User = require("./models/user.js");
@@ -74,8 +75,9 @@ app.use((req,res,next)=>{
 });
 
 // route bhanda aagadi nai session rah flash lignu parcha
-app.use("/listing",listings);
-app.use("/listing/:id/reviews",reviews);
+app.use("/listing",listingsRouter);
+app.use("/listing/:id/reviews",reviewsRouter);
+app.use("/",userRouter);
 
 // app.get("/testListing",async(req,res)=>{
 //     let sampleListing = new listing({
