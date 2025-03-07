@@ -16,7 +16,7 @@ router.post("/signup",wrapAsync(async(req,res)=>{try{
     res.redirect("/listing");
 
 }catch(e){
-    req.flash("error","e.message");
+    req.flash("error",e.message);
     res.redirect("/signup");
 }
 }));
