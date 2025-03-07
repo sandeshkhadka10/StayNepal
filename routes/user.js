@@ -21,8 +21,8 @@ router.post("/signup",wrapAsync(async(req,res)=>{try{
 }
 }));
 
-router.get("/signup",(req,res)=>{
-    res.render("users/signup.ejs");
+router.get("/login",(req,res)=>{
+    res.render("users/login.ejs");
 });
 
 
