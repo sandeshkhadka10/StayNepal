@@ -14,9 +14,11 @@ const listings = require("./routes/listing.js");
 const reviews = require("./routes/review.js");
 const session = require("express-session");
 const flash = require("connect-flash");
+const User = require("./models/user.js");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
-const User = require("./models/user.js");
+
+
 
 app.listen(8080, () => {
     console.log("Server is listening to port 8080");
@@ -87,6 +89,15 @@ app.use("/listing/:id/reviews",reviews);
 //     console.log("sample was saved");
 //     res.send("Successfull test");
 // });
+
+app.get("/demouser",async(req,res)=>{
+    let fakeUser = new User({
+        email:"student@gmail.com",
+        username:"student"
+    }); 
+    let registerdUser = await User.register(fakeUser,"helloworld");
+    res.send(registerdUser);
+});
 
 // It is done if somebody gives random url
 app.all("*",(req,res,next)=>{
