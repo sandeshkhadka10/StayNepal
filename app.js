@@ -92,14 +92,14 @@ app.use("/",userRouter);
 //     res.send("Successfull test");
 // });
 
-app.get("/demouser",async(req,res)=>{
-    let fakeUser = new User({
-        email:"student@gmail.com",
-        username:"student"
-    }); 
-    let registerdUser = await User.register(fakeUser,"helloworld");
-    res.send(registerdUser);
-});
+// app.get("/demouser",async(req,res)=>{
+//     let fakeUser = new User({
+//         email:"student@gmail.com",
+//         username:"student"
+//     }); 
+//     let registerdUser = await User.register(fakeUser,"helloworld");
+//     res.send(registerdUser);
+// });
 
 // It is done if somebody gives random url
 app.all("*",(req,res,next)=>{
