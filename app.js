@@ -15,9 +15,9 @@ const reviewsRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 const session = require("express-session");
 const flash = require("connect-flash");
-const User = require("./models/user.js");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
+const User = require("./models/user.js");
 
 
 
@@ -66,7 +66,7 @@ app.use(passport.session()); // req lai thahos kun wala session ko part bhanera 
 passport.use(new LocalStrategy(User.authenticate()));
 
 passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.use((req,res,next)=>{
     res.locals.success = req.flash("success");
@@ -75,9 +75,10 @@ app.use((req,res,next)=>{
 });
 
 // route bhanda aagadi nai session rah flash lignu parcha
+app.use("/",userRouter);
 app.use("/listing",listingsRouter);
 app.use("/listing/:id/reviews",reviewsRouter);
-app.use("/",userRouter);
+
 
 // app.get("/testListing",async(req,res)=>{
 //     let sampleListing = new listing({

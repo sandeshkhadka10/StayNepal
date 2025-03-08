@@ -27,10 +27,15 @@ router.get("/login", (req, res) => {
     res.render("users/login.ejs");
 });
 
-router.post("/login",  passport.authenticate("local", { failureRedirect: "/login", failureFlash: true }), async (req, res) => {
-    req.flash("success","Welcome to BookMeNow");
-    res.redirect("/listing");
-});
+router.post(
+    "/login",
+    passport.authenticate("local", { failureRedirect: "/login", failureFlash: true }),
+    async(req, res) => {
+        req.flash("success","Welcome back to BookMeNow");
+        res.redirect("/listing");
+    }
+);
+
 
 
 module.exports = router;
