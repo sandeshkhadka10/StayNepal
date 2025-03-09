@@ -13,10 +13,15 @@ router.post("/signup", wrapAsync(async (req, res) => {
         let { username, email, password } = req.body;
         const newUser = new User({ username, email });
         const registerdUser = await User.register(newUser, password);
-        console.log(registerdUser);
-        req.flash("success", "Welcome to BookMeNow");
-        res.redirect("/listing");
+        // console.log(registerdUser);
+        req.login(registerdUser,(err)=>{
+            if(err){
+                return next(err);
+            }
 
+            req.flash("success","Welcome to BookMeNow");
+            res.redirect("/listing");
+        });
     } catch (e) {
         req.flash("error", e.message);
         res.redirect("/signup");
