@@ -70,11 +70,12 @@ router.delete("/:id",isLoggedIn, wrapAsync(async (req, res) => {
 // Show Route
 router.get("/:id", wrapAsync(async (req, res) => {
     let { id } = req.params;
-    const Listing = await listing.findById(id).populate("reviews");
+    const Listing = await listing.findById(id).populate("reviews").populate("owner");
     if(!Listing){
         req.flash("error","Listing you requested for does not exist!");
         res.redirect("/listing");
     }
+    // console.log(Listing);
     res.render("listings/show.ejs", { Listing });
 }));
 

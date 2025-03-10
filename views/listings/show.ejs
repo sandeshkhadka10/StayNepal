@@ -11,12 +11,25 @@
                 <img src="<%= Listing.image.url%>" class="card-img-top" alt="listing image" id="show-img">
                 <div class="card-body">
                     <p class="card-text">
-                        <%= Listing.description %><br>
-                        &#8360; <%= Listing.price.toLocaleString("ne-NP") %><br>
-                        <%= Listing.location %><br>
-                        <%= Listing.country %>
-
+                        <i>Owner: <%= Listing.owner.username %></i>
                     </p>
+
+                    <p class="card-text">
+                        <%= Listing.description %><br>
+                    </p>
+
+                    <p class="card-text">
+                        &#8360; <%= Listing.price.toLocaleString("ne-NP") %><br>
+                    </p>
+
+                    <p class="card-text">
+                        <%= Listing.location %><br>
+                    </p>
+
+                    <p class="card-text">
+                        <%= Listing.country %>
+                    </p>
+
                 </div>
             </div>
 
