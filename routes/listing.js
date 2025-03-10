@@ -42,7 +42,7 @@ router.post("/", isLoggedIn,validateListing, wrapAsync(async (req,res,next) => {
 }));
 
 // Edit Route
-router.get("/:id/edit",isLoggedIn, wrapAsync(async (req, res) => {
+router.get("/:id/edit",isLoggedIn,isOwner,wrapAsync(async (req, res) => {
     let { id } = req.params;
     let editListing = await listing.findById(id);
     if(!editListing){
@@ -66,7 +66,7 @@ router.patch("/:id",isLoggedIn,isOwner,validateListing, wrapAsync(async (req, re
 }));
 
 // Delete Route
-router.delete("/:id",isLoggedIn, wrapAsync(async (req, res) => {
+router.delete("/:id",isLoggedIn,isOwner,wrapAsync(async (req, res) => {
     let { id } = req.params;
     await listing.findByIdAndDelete(id);
     req.flash("success","Listing Deleted!");
