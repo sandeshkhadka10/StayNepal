@@ -56,9 +56,9 @@ router.get("/:id/edit",isLoggedIn,isOwner,wrapAsync(async (req, res) => {
 router.patch("/:id",isLoggedIn,isOwner,validateListing, wrapAsync(async (req, res) => {
     let { id } = req.params;
     // let Listing = await listing.findById(id);
-    // if(!Listing.owner._id.equals(res.locals.currUser.id)){
+    // if(!Listing.owner.equals(res.locals.currUser.id)){
     //     req.flash("error","You don't have permission to edit");
-    //     res.redirect(`/listing/${id}`);
+    //     return res.redirect(`/listing/${id}`);
     // }
     await listing.findByIdAndUpdate(id, { ...req.body.listing });
     req.flash("success","Listing Updated!");
@@ -82,7 +82,7 @@ router.get("/:id", wrapAsync(async (req, res) => {
         res.redirect("/listing");
     }
     // console.log(Listing);
-    res.render("listings/show.ejs", { Listing });
+    res.render("listings/show.ejs", {Listing});
 }));
 
 module.exports = router;
