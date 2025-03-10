@@ -35,19 +35,23 @@
 
             
 
-            <div class="btns">
-                <a href="/listing/<%= Listing.id %>/edit" class="btn btn-dark col-1 offset-3 edit-btn mt-3">Edit</a>
+            <% if(currUser && currUser._id.equals(Listing.owner._id)){ %>
+                <div class="btns">
+                    <a href="/listing/<%= Listing.id %>/edit" class="btn btn-dark col-1 offset-3 edit-btn mt-3">Edit</a>
+    
+                    <form method="post" action="/listing/<%= Listing.id %>?_method=DELETE">
+                        <button class="btn btn-dark offset-2 mt-3">Delete</button>
+                    </form>
+                    
+                </div>
 
-                <form method="post" action="/listing/<%= Listing.id %>?_method=DELETE">
-                    <button class="btn btn-dark offset-2 mt-3">Delete</button>
-                </form>
-                
-            </div>
+            <%}%>
             
 
             <!-- For Review Form -->
              <div class="col-8 offset-3 mb-3">
                 <hr>
+                <% if(currUser){%>
                 <h4>Leave a Review</h4>
                 <form method="post" action="/listing/<%= Listing.id %>/reviews" class="needs-validation" novalidate>
                     <div class="mb-3 mt-3">
@@ -62,6 +66,7 @@
                     </div>
                     <button class="btn btn-outline-dark">Submit</button>
                 </form>
+                <%}%>
 
                 <hr>
 
