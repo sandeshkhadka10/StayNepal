@@ -10,8 +10,8 @@
             <div class="card col-6 offset-3 mt-3 listing-card">
                 <img src="<%= Listing.image.url%>" class="card-img-top" alt="listing image" id="show-img">
                 <div class="card-body">
-                    <p class="card-text">
-                        <i>Owner: <%= Listing.owner.username %></i>
+                    <p class="card-text">Owned by:
+                        <i><%= Listing.owner.username %></i>
                     </p>
 
                     <p class="card-text">
