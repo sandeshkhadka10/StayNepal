@@ -33,17 +33,16 @@
                 </div>
             </div>
 
-            <% if(currUser && currUser._id.equals(Listing.owner._id)){ %>
-                <div class="btns">
-                    <a href="/listing/<%= Listing.id %>/edit" class="btn btn-dark col-1 offset-3 edit-btn mt-3">Edit</a>
-    
-                    <form method="post" action="/listing/<%= Listing.id %>?_method=DELETE">
-                        <button class="btn btn-dark offset-2 mt-3">Delete</button>
-                    </form>
-                    
-                </div>
+            
 
-            <%}%>
+            <div class="btns">
+                <a href="/listing/<%= Listing.id %>/edit" class="btn btn-dark col-1 offset-3 edit-btn mt-3">Edit</a>
+
+                <form method="post" action="/listing/<%= Listing.id %>?_method=DELETE">
+                    <button class="btn btn-dark offset-2 mt-3">Delete</button>
+                </form>
+                
+            </div>
             
 
             <!-- For Review Form -->

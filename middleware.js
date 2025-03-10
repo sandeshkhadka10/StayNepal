@@ -1,3 +1,5 @@
+const listing = require("./models/listing");
+
 module.exports.isLoggedIn = (req,res,next)=>{
     // console.log(req.user);
     // console.log(req);
@@ -16,4 +18,13 @@ module.exports.saveRedirectUrl = (req,res,next)=>{
         res.locals.redirectUrl = req.session.redirectUrl;
     }
     next();
+}
+
+module.exports.isOwner = async(req,res,next)=>{
+    let { id } = req.params;
+    let Listing = await listing.findById(id);
+    if(!Listing.owner._id.equals(res.locals.currUser._id)){
+        req.flash("error","You don't have permission to edit");
+        res.redirect(`/listing/${id}`);
+    }
 }

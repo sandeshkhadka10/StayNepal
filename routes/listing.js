@@ -4,7 +4,7 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/ExpressError.js");
 const {listingSchema} = require("../schema.js");
 const listing = require("../models/listing");
-const {isLoggedIn} = require("../middleware.js");
+const {isLoggedIn, isOwner} = require("../middleware.js");
 
 // It is done for the server side validation
 const validateListing = (req,res,next)=>{
@@ -53,8 +53,13 @@ router.get("/:id/edit",isLoggedIn, wrapAsync(async (req, res) => {
 }));
 
 // Update Route
-router.patch("/:id",isLoggedIn,validateListing, wrapAsync(async (req, res) => {
+router.patch("/:id",isLoggedIn,isOwner,validateListing, wrapAsync(async (req, res) => {
     let { id } = req.params;
+    // let Listing = await listing.findById(id);
+    // if(!Listing.owner._id.equals(res.locals.currUser.id)){
+    //     req.flash("error","You don't have permission to edit");
+    //     res.redirect(`/listing/${id}`);
+    // }
     await listing.findByIdAndUpdate(id, { ...req.body.listing });
     req.flash("success","Listing Updated!");
     res.redirect(`/listing/${id}`);
