@@ -5,7 +5,7 @@ const wrapAsync = require("../utils/wrapAsync.js");
 // const {reviewSchema} = require("../schema.js");
 const listing = require("../models/listing");
 const review = require("../models/review.js");
-const {validateReview} = require("../middleware.js");
+const {validateReview, isLoggedIn} = require("../middleware.js");
 
 // const validateReview = (req,res,next)=>{
 //     let {error} = reviewSchema.validate(req.body);
@@ -18,13 +18,14 @@ const {validateReview} = require("../middleware.js");
 // }
 
 // Post Reviews Route
-router.post("/",validateReview,wrapAsync(async(req,res)=>{
+router.post("/",isLoggedIn,validateReview,wrapAsync(async(req,res)=>{
     let {id} = req.params;
 
     // console.log(req.params.id);
 
     let Listing = await listing.findById(id);
     let newReview = new review(req.body.review);
+    newReview.author = req.user._id;
 
     Listing.reviews.push(newReview); //yoh reviews bhaneko chai array ho jun listingSchema bitra cha
 
