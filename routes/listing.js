@@ -9,6 +9,9 @@ router.route("/")
     .get(wrapAsync(listingController.indexRoute))
     .post(isLoggedIn, validateListing, wrapAsync(listingController.createListing));
 
+// New Route
+router.get("/new", isLoggedIn, listingController.renderNewForm);
+
 router.route("/:id")
     .get(wrapAsync(listingController.showListing))
     .patch(isLoggedIn, isOwner, validateListing, wrapAsync(listingController.updateListing))
@@ -16,9 +19,6 @@ router.route("/:id")
 
 // Index Route
 // router.get("/", wrapAsync(listingController.indexRoute));
-
-// New Route
-router.get("/new", isLoggedIn, listingController.renderNewForm);
 
 // Create Route
 // router.post("/", isLoggedIn,validateListing, wrapAsync(listingController.createListing));
