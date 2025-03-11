@@ -1,4 +1,5 @@
 const listing = require("./models/listing");
+const review = require("./models/review.js");
 const ExpressError = require("./utils/ExpressError.js");
 const {listingSchema,reviewSchema} = require("./schema.js");
 
@@ -51,4 +52,15 @@ module.exports.validateReview = (req,res,next)=>{
     }else{
         next();
     }
+}
+
+// It is made for deleting the review by the valid author only
+module.exports.isReviewAuther = async(req,res,next)=>{
+    let {id,reviewId} = req.params;
+    let Review = await review.findById(reviewId);
+    if(!Review.author.equals(res.locals.currUser._id)){
+        req.flash("error","You are not the author of these review");
+        return res.redirect(`/listing/${id}`);
+    }
+    next();
 }
