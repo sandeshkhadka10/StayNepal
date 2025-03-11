@@ -6,6 +6,8 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const listing = require("../models/listing");
 const {isLoggedIn, isOwner, validateListing} = require("../middleware.js");
 
+const listingController = require("../controllers/listing.js");
+
 // It is done for the server side validation
 // const validateListing = (req,res,next)=>{
 //     let {error} = listingSchema.validate(req.body);
@@ -18,10 +20,7 @@ const {isLoggedIn, isOwner, validateListing} = require("../middleware.js");
 // }
 
 // Index Route
-router.get("/", wrapAsync(async (req, res) => {
-    let allListing = await listing.find();
-    res.render("listings/index.ejs", { allListing });
-}));
+router.get("/", wrapAsync(listingController.index));
 
 // New Route
 router.get("/new", isLoggedIn,(req, res) => {
