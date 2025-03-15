@@ -1,6 +1,6 @@
 <% layout("/layouts/boilerplate") %>
 <body>
-        <form method="post" action="/listing/<%= editListing.id %>?_method=PATCH" class="needs-validation" novalidate>
+        <form method="post" action="/listing/<%= editListing.id %>?_method=PATCH" class="needs-validation" novalidate enctype="multipart/form-data">
 
             <div class="row">
 
@@ -18,15 +18,15 @@
                     </div>
         
                     <div class="mb-3">
-                        <label for="description" class="form-label"></label>
+                        <label for="description" class="form-label">Description</label>
                         <textarea name="listing[description]" class="form-control" required><%= editListing.description %></textarea>
                         <div class="valid-feedback">Description Looks Good</div>
                         <div class="invalid-feedback">Please Fill Up description</div>
                     </div>
         
                     <div class="mb-3">
-                        <label class="image" class="form-label">Image</label>
-                        <input name="listing[image]" value="<%= editListing.image %>" class="form-control" required>
+                        <label class="image" class="form-label">Upload New Image</label>
+                        <input name="listing[image]" class="form-control" type="file">
                         <div class="valid-feedback">Valid Image URL</div>
                         <div class="invalid-feedback">Please Fill Up Image URL</div>
                     </div>
