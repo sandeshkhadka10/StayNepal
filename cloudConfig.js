@@ -11,7 +11,7 @@ const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
       folder: 'BookMeNow',
-      allowedformat: ["png","jgp","jpeg"]
+      allowedformat: ["png","jgp","jpeg","jfif"]
     },
 });
 
