@@ -50,8 +50,8 @@
 
         <!-- For Review Form -->
             <div class="col-8 offset-3 mb-3">
-                <hr>
                 <% if(currUser){%>
+                    <hr>
                     <h4>Leave a Review</h4>
                     <form method="post" action="/listing/<%= Listing.id %>/reviews" class="needs-validation"novalidate>
                         <div class="mb-3 mt-3">
@@ -99,8 +99,21 @@
                     </div>
                 <%}%>
                 </div>
-                <div class="col-8 offset-3 mb-3">
+
+                <!-- This is done to show the map -->
+                <!-- <div class="col-8 offset-3 mb-3">
                     <h3>Where you'll be</h3>
                     <div id="map"></div>
                 </div>
+                <script>
+                    let mapToken = "<%= process.env.MAP_TOKEN %>"
+                    console.log(mapToken);
+                    mapboxgl.accessToken = mapToken;
+                    const map = new mapboxgl.Map({
+                        container: 'map', // container ID
+                        center: [-74.5, 40], // starting position [lng, lat]. Note that lat must be set between -90 and 90
+                        zoom: 9 // starting zoom
+                    });
+                </script> -->
+                
     </div>
