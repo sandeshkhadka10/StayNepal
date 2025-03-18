@@ -19,12 +19,12 @@ module.exports.renderNewForm = (req, res) => {
 
 module.exports.createListing = (async (req,res,next) => {
     let response = await geocodingClient.forwardGeocode({
-        query: 'Kathmandu, Nepal',
+        query: req.body.listing.location,
         limit: 2
     })
     .send()
 
-    console.log(response);
+    console.log(response.body.features[0].geometry);
     res.send("done");
     
     let url = req.file.path;
