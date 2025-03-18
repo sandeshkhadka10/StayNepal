@@ -103,4 +103,7 @@ nav{
 
 
 /* Map */
-#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+#map { 
+    height: 400px;
+    width: 80vh;
+}
