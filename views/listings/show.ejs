@@ -1,4 +1,7 @@
 <% layout("/layouts/boilerplate") %>
+<script>
+    const mapToken = "<%= process.env.MAP_TOKEN %>";
+</script>
     <div class="row">
 
         <div class="col-8 offset-3 mt-3 show-card">
@@ -106,14 +109,4 @@
                     <div id="map"></div>
                 </div>
     </div>
-    <script>
-        let maptoken = "<%= process.env.MAP_TOKEN %>";
-        console.log(maptoken);
-        mapboxgl.accessToken = maptoken;
-        const map = new mapboxgl.Map({
-            container: 'map', // container ID
-            style: "mapbox://styles/mapbox/streets-v12",
-            center: [ 85.3222, 27.7103], // starting position [lng, lat]. Note that lat must be set between -90 and 90
-            zoom: 9 // starting zoom
-        });
-    </script>
+    <script src="/js/map.js"></script>
