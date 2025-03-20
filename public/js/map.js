@@ -8,8 +8,7 @@ const map = new mapboxgl.Map({
 });
       
 // Create a default Marker and add it to the map.
-console.log(coordinates);
-
+// console.log(coordinates); yoh use gareko to check whether coordinates aako cha kinai public file ma
 const marker = new mapboxgl.Marker({color:"red"})
  .setLngLat(coordinates)
  .addTo(map);
