@@ -53,27 +53,29 @@
 
                 <div class="mb-3">
                     <label for="country" class="form-label">Country</label>
-                    <input type="text" name="listing[country]" placeholder="Kathmandu,Nepal" class="form-control" required>
+                    <input type="text" name="listing[country]" placeholder="Kathmandu,Nepal" class="form-control"
+                        required>
                     <div class="valid-feedback">Valid Country</div>
                     <div class="invalid-feedback">Please Fill Up Country</div>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Category</label>
-                    <select class="form-select" aria-label="Default select example" name="listing[category]">
-                        <option selected>Open this to select the category</option>
-                        <option value="trending">Trending</option>
-                        <option value="room">Room</option>
-                        <option value="iconic-cities">Iconic Cities</option>
-                        <option value="mountains">Mountains</option>
-                        <option value="castles">Castles</option>
-                        <option value="amazing-pools">Amazing Pools</option>
-                        <option value="camping">Camping</option>
-                        <option value="farms">Farms</option>
-                        <option value="arctic">Arctic</option>
-                      </select>                                           
+                    <select class="form-select" name="listing[category]" required>
+                        <option selected disabled>Open this to select the category</option>
+                        <option value="Trending">Trending</option>
+                        <option value="Room">Room</option>
+                        <option value="Iconic Cities">Iconic Cities</option>
+                        <option value="Mountains">Mountains</option>
+                        <option value="Castles">Castles</option>
+                        <option value="Amazing Pools">Amazing Pools</option>
+                        <option value="Camping">Camping</option>
+                        <option value="Farms">Farms</option>
+                        <option value="Artic">Arctic</option>
+                    </select>
+                    
                 </div>
-                
+
 
                 <div class="mb-3">
                     <button class="btn btn-dark add-btn">Add</button>

@@ -32,6 +32,8 @@ module.exports.createListing = (async (req,res,next) => {
     // console.log(url,"..",filename);
 
     const newListing = new listing(req.body.listing);
+    console.log(newListing.category);
+
     newListing.owner = req.user._id;
     newListing.image = {url,filename};
 
