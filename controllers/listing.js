@@ -5,7 +5,13 @@ const geocodingClient = mbxGeoCoding({ accessToken: mapToken });
 
 
 module.exports.indexRoute = (async (req, res) => {
-    let allListing = await listing.find();
+    let {category} = req.query;
+
+    // If a category is selected filter it otherwise show all listing
+    let filter = category?{category}:{};
+    console.log(filter);
+
+    let allListing = await listing.find(filter);
     res.render("listings/index.ejs", { allListing });
 });
 
@@ -89,3 +95,14 @@ module.exports.showListing = (async (req, res) => {
     }
     res.render("listings/show.ejs", {Listing});
 });
+
+// module.exports.showListingByCategory = (async(req,res)=>{
+//     let {category} = req.body;
+
+//     // If a category is selected filter it otherwise show all listing
+//     let filter = category?{category}:{};
+
+//     const listings = await listing.find(filter);
+
+//     res.render("listings/index.ejs",{listings});
+// });
