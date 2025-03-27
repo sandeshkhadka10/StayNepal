@@ -32,7 +32,7 @@ module.exports.createListing = (async (req,res,next) => {
     // console.log(url,"..",filename);
 
     const newListing = new listing(req.body.listing);
-    console.log(newListing.category);
+    // console.log(newListing.category); it is done to check whether the category is being passed or not
 
     newListing.owner = req.user._id;
     newListing.image = {url,filename};
