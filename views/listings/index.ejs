@@ -4,6 +4,7 @@
     #filters{
       display: flex;
       flex-wrap: wrap;
+      align-items: center;
     }
     .filter{
       text-align: center;
@@ -21,6 +22,15 @@
     }
     .tax-info{
       display: none;
+    }
+    .tax-toggle{
+      border: 1px solid black;
+      border-radius: 1rem;
+      height: 3.25rem;
+      padding: 1rem;
+      margin-left: 3rem;
+      display: flex;
+      align-items: center;
     }
     
   </style>
@@ -69,6 +79,16 @@
     <a href="/listing?category=Artic"class="filter">
       <div><i class="fa-solid fa-snowflake"></i></div>
       <p>Artic</p>
+    </a>
+
+    <a href="/listing?category=Igloo"class="filter">
+      <div><i class="fa-solid fa-igloo"></i></div>
+      <p>Domes</p>
+    </a>
+
+    <a href="/listing?category=Sail-Boat"class="filter">
+      <div><i class="fa-solid fa-sailboat"></i></div>
+      <p>Sail-Boat</p>
     </a>
 
     <div class="tax-toggle">
