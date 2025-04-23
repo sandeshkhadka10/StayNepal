@@ -6,10 +6,16 @@ const geocodingClient = mbxGeoCoding({ accessToken: mapToken });
 
 module.exports.indexRoute = (async (req, res) => {
     let {category} = req.query;
+    let {location} = req.query;
 
     // If a category is selected filter it otherwise show all listing
     let filter = category?{category}:{};
     console.log(filter);
+
+    // It is for providing the specific location based on the user input
+    if(location){
+        filter.location = location;
+    }
 
     let allListing = await listing.find(filter);
     res.render("listings/index.ejs", { allListing });

@@ -18,7 +18,8 @@ const listingSchema = new mongoose.Schema({
         type: Number
     },
     location: {
-        type: String
+        type: String,
+        enum: ["Butwal","Kathmandu"],
     },
     country: {
         type: String
