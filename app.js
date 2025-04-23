@@ -19,6 +19,7 @@ const listingsRouter = require("./routes/listing.js");
 const reviewsRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 const session = require("express-session");
+const MongoStore = require('connect-mongo');
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -49,7 +50,22 @@ async function main() {
     await mongoose.connect(dbUrl);
 }
 
+// method that is used to create a new store mongo
+// yoh jaile pani mathi halne kina bhane session ma sessionOptions pass bhako cha
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    crypto:{
+        secret: "sandeshkhadka"
+    },
+    touchAfter: 24 * 3600,
+});
+
+store.on("error",()=>{
+    console.log("ERROR in MONGO SESSION STORE",err);
+});
+
 const sessionOptions = ({
+    store,
     secret : "sandeshkhadka",
     resave : false,
     saveUninitialized:true,
@@ -63,7 +79,7 @@ const sessionOptions = ({
 // app.get("/", (req, res) => {
 //     res.send("Hi, I am root");
 // });
- 
+
 app.use(session(sessionOptions));
 app.use(flash());
 
