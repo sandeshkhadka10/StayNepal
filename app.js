@@ -37,7 +37,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.engine('ejs', ejsMate);
 
-
+// const MONGO_URL = 'mongodb://127.0.0.1:27017/bookmenow';
+const dbUrl = process.env.ATLASDB_URL;
 main()
     .then(() => {
         console.log("Connected Successfully");
@@ -45,7 +46,7 @@ main()
     .catch(err => console.log(err));
 
 async function main() {
-    await mongoose.connect('mongodb://127.0.0.1:27017/bookmenow');
+    await mongoose.connect(dbUrl);
 }
 
 const sessionOptions = ({
