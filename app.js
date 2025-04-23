@@ -50,7 +50,7 @@ async function main() {
     await mongoose.connect(dbUrl);
 }
 
-// method that is used to create a new store mongo
+// method that is used to create a new mongo store
 // yoh jaile pani mathi halne kina bhane session ma sessionOptions pass bhako cha
 const store = MongoStore.create({
     mongoUrl: dbUrl,
