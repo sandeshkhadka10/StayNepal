@@ -97,7 +97,9 @@
                                         <p class="card-text"><%= review.comment %></p>
                                     </div>
                                     <form class="mb-3" method="post"action="/listing/<%= Listing.id %>/reviews/<%= review.id %>?_method=DELETE">
-                                                <button class="btn btn-sm btn-dark mt-1">Delete</button>
+                                        <% if(!currUser){%>
+                                            <button class="btn btn-sm btn-dark mt-1">Delete</button>
+                                        <%}%>
                                     </form>
                                 </div>
                             <%}%>
