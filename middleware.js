@@ -10,7 +10,7 @@ module.exports.isLoggedIn = (req,res,next)=>{
     if(!req.isAuthenticated()){
         // login garepachi kaam garne specific path ma jaos bhanera
         req.session.redirectUrl = req.originalUrl;
-        req.flash("error","You must be logged in to create listing!");
+        req.flash("error","You must be logged in to do the respective action!");
         return res.redirect("/login");
     }
     next();
