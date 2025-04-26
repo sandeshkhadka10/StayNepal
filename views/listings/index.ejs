@@ -179,11 +179,14 @@
 
     function scrollLeft() {
       filterContainer.scrollBy({ left: -200, behavior: 'smooth' });
+      setTimeout(updateArrows, 300); // Add this line to update arrow visibility after scrolling
     }
 
     function scrollRight() {
       filterContainer.scrollBy({ left: 200, behavior: 'smooth' });
+      setTimeout(updateArrows, 300); // Same here
     }
+
 
     filterContainer.addEventListener("scroll", updateArrows);
     window.addEventListener("load", updateArrows);
