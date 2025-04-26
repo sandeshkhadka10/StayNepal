@@ -82,7 +82,7 @@
 
   <div id="filter-wrapper">
 
-    <button class="scroll-btn scroll-left" onclick="scrollLeft()" id="leftArrow">&lt;</button>
+    <button class="scroll-btn scroll-left" onclick="scrollLeftFunc()" id="leftArrow">&lt;</button>
 
     <div id="filters">
       <a href="/listing?category=Trending" class="filter">
@@ -138,7 +138,7 @@
       </div>
     </div>
 
-    <button class="scroll-btn scroll-right" onclick="scrollRight()" id="rightArrow">&gt;</button>
+    <button class="scroll-btn scroll-right" onclick="scrollRightFunc()" id="rightArrow">&gt;</button>
 
   </div>
 
@@ -177,16 +177,16 @@
       rightArrow.style.display = filterContainer.scrollLeft + filterContainer.offsetWidth < filterContainer.scrollWidth ? "block" : "none";
     }
 
-    function scrollLeft() {
-      if (filterContainer.scrollLeft > 0) {
-        filterContainer.scrollBy({ left: -200, behavior: 'smooth' });
-      }
-    }
+    function scrollLeftFunc() {
+  if (filterContainer.scrollLeft > 0) {
+    filterContainer.scrollBy({ left: -200, behavior: 'smooth' });
+  }
+}
 
+function scrollRightFunc() {
+  filterContainer.scrollBy({ left: 200, behavior: 'smooth' });
+}
 
-    function scrollRight() {
-      filterContainer.scrollBy({ left: 200, behavior: 'smooth' });
-    }
 
 
     filterContainer.addEventListener("scroll", updateArrows);
