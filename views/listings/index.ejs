@@ -5,6 +5,8 @@
       position: relative;
       overflow: hidden;
       margin: 1rem 0;
+      display: flex;
+      align-items: center;
     }
 
     #filters {
@@ -14,6 +16,7 @@
       scroll-behavior: smooth;
       padding: 1rem 2rem;
       gap: 2rem;
+      flex-grow: 1;
     }
 
     .filter {
@@ -54,20 +57,28 @@
       right: 0;
     }
 
-    .tax-info {
-      display: none;
-    }
-
+    /* Tax Toggle - Aligned outside the scrollable part */
     .tax-toggle {
+      flex: 0 0 auto;
+      /* This keeps the tax toggle in its own space */
+      margin-left: 1rem;
+      /* Add some space from the scrollable filters */
       border: 1px solid black;
       border-radius: 1rem;
       height: 3.25rem;
-      padding: 1rem;
+      padding: 0 1rem;
       display: flex;
       align-items: center;
-      flex: 0 0 auto;
+      background: #fff;
+      opacity: 0.7;
+      cursor: pointer;
     }
 
+    .tax-toggle:hover {
+      opacity: 1;
+    }
+
+    /* Responsive Design */
     @media (max-width: 768px) {
       .scroll-btn {
         display: none;
@@ -77,11 +88,19 @@
         padding: 1rem;
         gap: 1rem;
       }
+
+      /* Adjust tax toggle position for mobile */
+      .tax-toggle {
+        margin-left: 0;
+        margin-top: 1rem;
+        /* To separate from filters */
+        width: 100%;
+        justify-content: center;
+      }
     }
   </style>
 
   <div id="filter-wrapper">
-
     <button class="scroll-btn scroll-left" onclick="scrollLeftFunc()" id="leftArrow">&lt;</button>
 
     <div id="filters">
@@ -129,18 +148,21 @@
         <div><i class="fa-solid fa-sailboat"></i></div>
         <p>Sail-Boat</p>
       </a>
+    </div>
 
-      <div class="tax-toggle">
-        <div class="form-check-reverse form-switch">
-          <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
-          <label class="form-check-label" for="switchCheckDefault">Display Total After Taxes</label>
-        </div>
+    <!-- Tax Toggle: Separate from scrollable part but aligned in same row -->
+    <div class="tax-toggle">
+      <div class="form-check-reverse form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+        <label class="form-check-label" for="switchCheckDefault">Display Total After Taxes</label>
       </div>
     </div>
 
     <button class="scroll-btn scroll-right" onclick="scrollRightFunc()" id="rightArrow">&gt;</button>
-
   </div>
+
+
+
 
 
 
@@ -178,14 +200,14 @@
     }
 
     function scrollLeftFunc() {
-  if (filterContainer.scrollLeft > 0) {
-    filterContainer.scrollBy({ left: -200, behavior: 'smooth' });
-  }
-}
+      if (filterContainer.scrollLeft > 0) {
+        filterContainer.scrollBy({ left: -200, behavior: 'smooth' });
+      }
+    }
 
-function scrollRightFunc() {
-  filterContainer.scrollBy({ left: 200, behavior: 'smooth' });
-}
+    function scrollRightFunc() {
+      filterContainer.scrollBy({ left: 200, behavior: 'smooth' });
+    }
 
 
 
