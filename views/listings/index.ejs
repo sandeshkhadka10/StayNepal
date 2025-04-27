@@ -57,27 +57,6 @@
       right: 0;
     }
 
-    /* Tax Toggle - Aligned outside the scrollable part */
-    .tax-toggle {
-      flex: 0 0 auto;
-      /* This keeps the tax toggle in its own space */
-      margin-left: 1rem;
-      /* Add some space from the scrollable filters */
-      border: 1px solid black;
-      border-radius: 1rem;
-      height: 3.25rem;
-      padding: 0 1rem;
-      display: flex;
-      align-items: center;
-      background: #fff;
-      opacity: 0.7;
-      cursor: pointer;
-    }
-
-    .tax-toggle:hover {
-      opacity: 1;
-    }
-
     /* Responsive Design */
     @media (max-width: 768px) {
       .scroll-btn {
@@ -89,14 +68,6 @@
         gap: 1rem;
       }
 
-      /* Adjust tax toggle position for mobile */
-      .tax-toggle {
-        margin-left: 0;
-        margin-top: 1rem;
-        /* To separate from filters */
-        width: 100%;
-        justify-content: center;
-      }
     }
   </style>
 
@@ -151,12 +122,12 @@
     </div>
 
     <!-- Tax Toggle: Separate from scrollable part but aligned in same row -->
-    <div class="tax-toggle">
+    <!-- <div class="tax-toggle">
       <div class="form-check-reverse form-switch">
         <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
         <label class="form-check-label" for="switchCheckDefault">Display Total After Taxes</label>
       </div>
-    </div>
+    </div> -->
 
     <button class="scroll-btn scroll-right" onclick="scrollRightFunc()" id="rightArrow">&gt;</button>
   </div>
@@ -179,7 +150,7 @@
                 <%= listing.title %>
               </b><br>
               &#8360; <%= listing.price.toLocaleString("ne-NP")%>/ night
-                <i class="tax-info">&nbsp; &nbsp;+18% GST</i>
+                <!-- <i class="tax-info">&nbsp; &nbsp;+18% GST</i> -->
             </p>
           </div>
         </div>
@@ -215,17 +186,17 @@
     window.addEventListener("load", updateArrows);
     window.addEventListener("resize", updateArrows);
 
-    let taxSwitch = document.getElementById("switchCheckDefault");
-    taxSwitch.addEventListener("click", () => {
-      let taxInfo = document.getElementsByClassName("tax-info");
-      for (info of taxInfo) {
-        if (info.style.display != "inline") {
-          info.style.display = "inline"
-        } else {
-          info.style.display = "none";
-        }
-      }
-    });
+    // let taxSwitch = document.getElementById("switchCheckDefault");
+    // taxSwitch.addEventListener("click", () => {
+    //   let taxInfo = document.getElementsByClassName("tax-info");
+    //   for (info of taxInfo) {
+    //     if (info.style.display != "inline") {
+    //       info.style.display = "inline"
+    //     } else {
+    //       info.style.display = "none";
+    //     }
+    //   }
+    // });
 
 
   </script>
