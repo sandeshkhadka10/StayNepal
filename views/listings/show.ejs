@@ -15,32 +15,44 @@
         <div class="card col-6 offset-3 mt-3 listing-card">
             <img src="<%= Listing.image.url%>" class="card-img-top" alt="listing image" id="show-img">
             <div class="card-body">
-                <p class="card-text">Owned by:
-                    <i>
-                        <%= Listing.owner.username %>
-                    </i>
+                <p class="card-text">
+                    <b>
+                        Owned by:
+                        <i>
+                           <%= Listing.owner.username %>
+                        </i>
+                    </b>
                 </p>
 
                 <p class="card-text">
+                    <b>
+                        Description:
+                    </b>
                     <%= Listing.description %>
                 </p>
 
                 <p class="card-text">
-                    &#8360; <%= Listing.price.toLocaleString("ne-NP") %>
+                    <b>
+                        Price:
+                    </b>
+                    &#8360; <%= Listing.price.toLocaleString("ne-NP") %> / night
                 </p>
 
-                <p class="card-text">
+                <!-- <p class="card-text">
                     <%= Listing.location %>
-                </p>
+                </p> -->
 
                 <p class="card-text">
-                    <%= Listing.country %>
+                    <b>
+                        Location:
+                    </b>
+                    <%= Listing.country %>  <i class="fa-solid fa-location-dot"></i>
                 </p>
 
             </div>
         </div>
-
-
+        <p></p>
+        <hr>
 
         <% if(currUser && currUser._id.equals(Listing.owner._id)){ %>
             <div class="btns">
@@ -56,10 +68,10 @@
         <!-- For Review Form -->
             <div class="col-8 offset-3 mb-3">
                 <% if(currUser){%>
-                    <hr>
-                    <h4>Leave a Review</h4>
+                    <h4>Leave a Review &nbsp;<i class="fa-regular fa-pen-to-square"></i></h4>
                     <form method="post" action="/listing/<%= Listing.id %>/reviews" class="needs-validation"novalidate>
                         <div class="mb-3 mt-3">
+                            <h6>Rating</h6>
                             <fieldset class="starability-slot">
                                 <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]"value="0" checked aria-label="No rating." />
                                 <input type="radio" id="first-rate1" name="review[rating]" value="1" />
