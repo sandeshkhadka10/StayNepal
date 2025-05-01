@@ -101,7 +101,7 @@
                 </div>
 
                 <div class="mb-3 mt-3">
-                    <label for="comment" class="form-label">Comments</label>
+                    <label for="comment" class="form-label"><h6>Comments</h6></label>
                     <textarea name="review[comment]" rows="5" cols="30" id="comment" class="form-control" required></textarea>
                     <div class="valid-feedback">Comment Added</div>
                     <div class="invalid-feedback">Please Fill Up Comment</div>
@@ -111,9 +111,8 @@
         <% } %>
 
         <% if(Listing.reviews.length > 0){ %>
-            <hr>
             <div class="row">
-                <p><b>All Reviews</b></p>
+                <p><b><br>All Reviews</b></p>
                 <% for(review of Listing.reviews){ %>
                     <div class="card col-5 ms-3 mb-3">
                         <div class="card-body">
@@ -131,6 +130,8 @@
             </div>
         <% } %>
     </div>
+    
+    <hr>
 
     <!-- Map Section -->
     <div class="col-8 offset-3 mb-3">
