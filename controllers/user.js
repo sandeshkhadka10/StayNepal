@@ -13,7 +13,7 @@ module.exports.createSignUp = (async (req, res) => {
             if(err){
                 return next(err);
             }
-            req.flash("success","Welcome to BookMeNow");
+            req.flash("success","Welcome to StayNepal");
             res.redirect("/listing");
         });
     } catch (e) {
@@ -27,7 +27,7 @@ module.exports.renderLoginForm = (req, res) => {
 };
 
 module.exports.createLogin =  async(req, res) => {
-    req.flash("success","Welcome back to BookMeNow");
+    req.flash("success","Welcome back to StayNepal");
     let redirectUrl = res.locals.redirectUrl || "/listing";
     res.redirect(redirectUrl);
 };
