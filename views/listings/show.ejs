@@ -67,16 +67,17 @@
     </div>
 
     <p></p>
-    <hr>
+    
 
     <% if(currUser && currUser._id.equals(Listing.owner._id)){ %>
         <div class="btns col-8 offset-3">
-            <a href="/listing/<%= Listing.id %>/edit" class="btn btn-dark edit-btn mt-3">Edit</a>
+            <a href="/listing/<%= Listing.id %>/edit" class="btn btn-dark edit-btn mt-3 m-1">Edit</a>
             <form method="post" action="/listing/<%= Listing.id %>?_method=DELETE" class="d-inline-block">
-                <button class="btn btn-dark mt-3">Delete</button>
+                <button class="btn btn-dark mt-3 m-1">Delete</button>
             </form>
         </div>
     <% } %>
+    <hr>
 
     <!-- For Review Form -->
     <div class="col-8 offset-3 mb-3">
