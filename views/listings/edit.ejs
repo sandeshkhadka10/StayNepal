@@ -68,7 +68,7 @@
                 <div class="mb-3">
                     <label class="form-label">Category</label>
                     <select class="form-select" name="listing[category]" required>
-                        <option selected disabled>Open this to select the category</option>
+                        <option selected><%= editListing.category %></option>
                         <option value="Airport">Airport</option>
                         <option value="Budget">Budget</option>
                         <option value="Bus-Park">Bus-Park</option>
@@ -83,7 +83,8 @@
                         <option value="Mountains">Mountains</option>
                         <option value="River-Side">River-Side</option>
                     </select>
-                    
+                    <div class="valid-feedback">Valid Country</div>
+                    <div class="invalid-feedback">Please Fill Up Country</div> 
                 </div>
 
                 <div class="mb-3">
