@@ -49,7 +49,8 @@ const listingSchema = new mongoose.Schema({
         enum: ["Airport","Budget","Bus-Park","Camping","City-Area","Domes","Eco-Friendly","Farms","Home-Stay","Lakes","Luxury","Mountains","River"],
     },
     contact:{
-        type:String
+        type:Number,
+        match: /^(98|97)[0-9]{8}$/
     }
 });
 
