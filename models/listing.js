@@ -47,6 +47,9 @@ const listingSchema = new mongoose.Schema({
     category:{
         type: String,
         enum: ["Airport","Budget","Bus-Park","Camping","City-Area","Domes","Eco-Friendly","Farms","Home-Stay","Lakes","Luxury","Mountains","River"],
+    },
+    contact:{
+        type:String
     }
 });
 

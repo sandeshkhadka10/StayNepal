@@ -51,13 +51,25 @@
                     </div>
                 </div>
 
-                <div class="mb-3">
-                    <label for="country" class="form-label">Country</label>
-                    <input type="text" name="listing[country]" placeholder="Nepal" class="form-control"
-                        required>
-                    <div class="valid-feedback">Valid Country</div>
-                    <div class="invalid-feedback">Please Fill Up Country</div>
+                <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label for="country" class="form-label">Country</label>
+                        <input type="text" name="listing[country]" placeholder="Nepal" class="form-control"
+                            required>
+                        <div class="valid-feedback">Valid Country</div>
+                        <div class="invalid-feedback">Please Fill Up Country</div>
+                    </div>
+
+                    <div class="mb-3 col-md-8">
+                        <label for="contact" class="form-label">Contact Detail:</label>
+                        <input type="phonenumber" name="listing[contact]" placeholder="9865983210" class="form-control"
+                            required>
+                        <div class="valid-feedback">Valid Contact-Number</div>
+                        <div class="invalid-feedback">Please Fill Up Contact-Number </div>
+                    </div>
+
                 </div>
+                
 
                 <div class="mb-3">
                     <label class="form-label">Category</label>
