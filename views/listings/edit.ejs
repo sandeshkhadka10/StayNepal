@@ -40,10 +40,10 @@
 
                     <div class="mb-3 col-md-4">
                         <label for="price" class="form-label">Price</label>
-                        <input type="text" name="listing[price]" value="<%= editListing.price %>" class="form-control"
+                        <input type="number" name="listing[price]" value="<%= editListing.price %>" class="form-control" min="0"
                             required>
                         <div class="valid-feedback">Valid Amount</div>
-                        <div class="invalid-feedback">Please Fill Up Price</div>
+                        <div class="invalid-feedback">Please Fill Up Valid Price</div>
                     </div>
 
                     <div class="mb-3 col-md-8">
