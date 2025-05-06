@@ -1,14 +1,239 @@
+<style>
+    .main-ftr {
+    background-color: #f6f3f3dc;
+    width: 100%;
+    padding: 3% 0% 0% 5%;
+    margin-top: 30px;
+}
+
+.main-light {
+    font-weight: 600;
+}
+
+@media (max-width:780px) {
+    .ftr-nav-pop > div {
+        width: 190px;
+    }
+}
+
+@media (max-width:425px) {
+    .ftr-nav-pop > div {
+        width: 150px;
+    }
+}
+
+@media (max-width:375px) {
+    .ftr-nav-pop > div {
+        width: 120px;
+    }
+}
+
+.ftr-hr {
+    margin-right: 5%;
+}
+
+.show i {
+    font-size: .8rem;
+    opacity: .6;
+}
+
+.show:hover {
+    opacity: 1;
+}
+
+.show span:hover {
+    text-decoration: underline;
+}
+
+.ftr-mdl {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 0px 10px 0px 0px;
+}
+
+.ftr-mdl > div {
+    margin: 1% 5% 2% 0%;
+    width: calc((70%) / 3);
+    padding: 10px 0px;
+    border-bottom: 1px solid rgba(0, 0, 0, .5);
+}
+
+@media (max-width:780px) {
+    .ftr-mdl > div {
+        width: 270px;
+    }
+}
+
+.ftr-mdl-cont > div > span:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.ftr-copy {
+    margin: 20px 0px 20px 0px;
+    margin-right: 5%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.ftr-copy > div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.ftr-copy a {
+    color: black;
+    opacity: 8;
+}
+
+.ftr-net {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 5px;
+}
+
+.ftr-net > div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 120px;
+}
+
+.social-icon img {
+    width: 1.75rem;
+    height: 1.75rem;
+    margin: .25rem;
+}
+
+.social-icon a {
+    transition: .3s ease-in-out 0s;
+    opacity: .7;
+}
+
+.social-icon a:hover {
+    transform: scale(1.5);
+    opacity: 1;
+}
+
+.ftr-inr {
+    font-size: .95rem;
+    font-weight: 700;
+}
+
+.eng-in {
+    cursor: pointer;
+}
+
+@media (max-width:375px) {
+    .priv {
+        font-size: .93rem;
+    }
+}
+
+@media (max-width:925px) {
+    .ftr-copy {
+        flex-direction: column-reverse;
+    }
+}
+
+@keyframes sheck {
+    0% {
+        transform: scale(1);
+    }
+
+    33% {
+        transform: scale(1.2);
+    }
+
+    50% {
+        transform: scale(1);
+    }
+
+    66% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+</style>
 <footer>
-    <div class="f-info">
-        <div class="f-info-socials">
-            <i class="fa-brands fa-square-facebook"></i>
-            <i class="fa-brands fa-square-instagram"></i>
-            <i class="fa-brands fa-linkedin"></i>        
+    <div class="main-ftr">
+        <hr class="ftr-hr">
+        <div class="ftr-mdl">
+            <div>
+                <div class="main-light mb-2">Assistance Center</div>
+                <div class="ftr-mdl-cont">
+                    <div><span>Help Desk</span></div>
+                    <div><span>SkyShield</span></div>
+                    <div><span>Equality Protection</span></div>
+                    <div><span>Accessibility support</span></div>
+                    <div><span>Cancellation Policy</span></div>
+                    <div><span>Report Local Issue</span></div>
+                </div>
+            </div>
+            <div>
+                <div class="main-light mb-2">Guest Hosting</span></div>
+                <div class="ftr-mdl-cont">
+                    <div><span>List Your Space on Airbnb</span></div>
+                    <div><span>SkyShield for Hosts</span></div>
+                    <div><span>Hosting Tools</span></div>
+                    <div><span>Community Discussion Board</span></div>
+                    <div><span>Responsible Hosting</span></div>
+                </div>
+            </div>
+            <div>
+                <div class="main-light mb-2">Airbnb Services</div>
+                <div class="ftr-mdl-cont">
+                    <div><span>Media Hub</span></div>
+                    <div><span>Recent Updated</span></div>
+                    <div><span>Job Opportunities</span></div>
+                    <div><span>Shareholders</span></div>
+                    <div><span>Airbnb.org Crisis Accommodations</span></div>
+                </div>
+            </div>
         </div>
-        <div class="f-info-brand"> &copy;StayNepal Private Limited</div>
-        <div class="f-info-links">
-            <a href="/privacy">Privacy</a>
-            <a href="/terms">Terms</a>
+        <hr class="ftr-hr">
+        <div class="ftr-copy">
+            <div>
+                <div>&copy; 2024 Airbnb, Inc. &sdot; &nbsp; </div>
+                <div class="priv">
+                    <a href="#">Privacy</a> &sdot;
+                    <a href="#">Terms</a> &sdot;
+                    <a href="#">Sitemap</a> &sdot;
+                    <a href="#">Company details</a>
+                </div>
+            </div>
+            <div class="ftr-net">
+                <div class="eng-in">
+                    <i class="fa-solid fa-globe me-1"></i>
+                    <div class="main-light">English (IN)</div>
+                </div>
+                <div class="ftr-inr">₹ INR</div>
+                <div class="social-icon">
+                    <a target="_blank" href="https://github.com/Aryannagar1912">
+                        <img src="/Icon/github.png" alt="GitHub" />
+                    </a>
+                    <a target="_blank" href="https://www.linkedin.com/in/aryan-nagar19/">
+                        <img src="/Icon/linkedIn.png" alt="LinkedIn" />
+                    </a>
+                    <a target="_blank" href="#">
+                        <img src="/Icon/instagram.png" alt="Instagram" />
+                    </a>
+                    <a target="_blank" href="#">
+                        <img src="/Icon/facebook.png" alt="Facebook" style="padding: 1px;" />
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </footer>
