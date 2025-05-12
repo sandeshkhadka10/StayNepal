@@ -37,7 +37,8 @@ router.route("/login")
 // for doing logout
 router.get("/logout", userController.logout);
 
-// for forget password
+// for password-reset
+
 router.get("/forgetPassword",(req,res)=>{
     // console.log("it is running");
     res.render("users/forgetPassword.ejs");
@@ -53,5 +54,13 @@ router.post("/forgetPassword",wrapAsync(async(req,res)=>{
         req.session.resetEmail = email;
         res.redirect("/resetPassword");
 }));
+
+router.get("/resetPassword",(req,res)=>{
+    if(!req.session.resetEmail){
+        req.flash("error","Session expired. Try again.");
+        return res.redirect("/forgetPassword");
+    }
+    res.render("users/resetPassword.ejs");
+});
 
 module.exports = router;
