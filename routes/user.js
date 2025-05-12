@@ -43,4 +43,15 @@ router.get("/forgetPassword",(req,res)=>{
     res.render("users/forgetPassword.ejs");
 });
 
+router.post("/forgetPassword",wrapAsync(async(req,res)=>{
+        let {email} = req.body;
+        let user = await User.findOne({email});
+        if(!user){
+            req.flash("error","Email is not registered");
+            return res.redirect("/forgetPassword");
+        }
+        req.session.resetEmail = email;
+        res.redirect("/resetPassword");
+}));
+
 module.exports = router;
