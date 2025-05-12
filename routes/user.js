@@ -38,6 +38,9 @@ router.route("/login")
 router.get("/logout", userController.logout);
 
 // for forget password
-
+router.get("/forgetPassword",(req,res)=>{
+    // console.log("it is running");
+    res.render("users/forgetPassword.ejs");
+});
 
 module.exports = router;
