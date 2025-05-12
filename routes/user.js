@@ -63,4 +63,23 @@ router.get("/resetPassword",(req,res)=>{
     res.render("users/resetPassword.ejs");
 });
 
+router.post("/resetPassword",wrapAsync(async(req,res)=>{
+    let {newPassword} = req.body;
+    let email = req.session.resetEmail;
+
+    let user = await User.findOne({email});
+    if(!user){
+        req.flash("error","User not found");
+        return res.redirect("/forgetPassword");
+    }
+
+    await user.setPassword(newPassword);
+    await user.save();
+
+    delete req.session.resetEmail;
+
+    req.flash("success","Password updated successfully! Please log in.");
+    res.redirect("/login");
+}));
+
 module.exports = router;
