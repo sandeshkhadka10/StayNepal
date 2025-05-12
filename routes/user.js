@@ -37,4 +37,6 @@ router.route("/login")
 // for doing logout
 router.get("/logout", userController.logout);
 
+// for forget password
+
 module.exports = router;
