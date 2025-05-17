@@ -24,7 +24,11 @@
             <p class="card-text"><b>Contact Detail:</b> <%= Listing.contact %></p>
         </div>
     </div>
-
+    
+    <div class="btns col-8 offset-3">
+        <a href="#" class="btn btn-dark mt-3 m-1">BookNow</a>
+    </div>
+    
     <p></p>
     
     <% if(currUser && currUser._id.equals(Listing.owner._id)){ %>
