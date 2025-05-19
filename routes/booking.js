@@ -16,7 +16,7 @@ router.get("/listing/:id/book", async(req, res) => {
     }
 });
 
-router.post("/listing/:id/book", async (res, req) => {
+router.post("/listing/:id/book", async (req, res) => {
     try {
         // find the listing
         const listingId = req.params.id;
@@ -37,7 +37,7 @@ router.post("/listing/:id/book", async (res, req) => {
         });
         await transporter.sendMail({
             from: '"StayNepal" <attkhadka551@gmail.com>',
-            to: "Listing.owner.email",
+            to: Listing.owner.email,
             subject: `New Booking for ${Listing.title}`,
             html:`
                <h3>You have a new booking</h3>
@@ -49,12 +49,12 @@ router.post("/listing/:id/book", async (res, req) => {
                `
         });
 
-        req.flash("success","Booking confirmed! The owner has been notified");
+        // req.flash("success","Booking confirmed! The owner has been notified");
         res.redirect(`/listing/${listingId}`);
 
-    } catch (err) {
-        req.flash("error","Something went wrong while processing your booking");
-        res.redirect(`/listing/${listingId}`);
+    }catch(err){
+        // req.flash("error","Something went wrong while processing your booking");
+        res.redirect(`/listing/${req.params.id}`);
     }
 });
 
