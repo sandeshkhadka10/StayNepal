@@ -3,9 +3,11 @@ const router = express.Router();
 const booking = require("../models/booking");
 const listing = require("../models/listing");
 const nodemailer = require("nodemailer");
+const wrapAsync = require("../utils/wrapAsync.js");
+const { isLoggedIn} = require("../middleware.js");
 require('dotenv').config();
 
-router.get("/listing/:id/book", async(req, res) => {
+router.get("/listing/:id/book", isLoggedIn,async(req, res) => {
     // console.log("it is working");
     try{
         const listingId = req.params.id;
@@ -16,7 +18,7 @@ router.get("/listing/:id/book", async(req, res) => {
     }
 });
 
-router.post("/listing/:id/book", async (req, res) => {
+router.post("/listing/:id/book", isLoggedIn,wrapAsync(async (req, res) => {
     try {
         // find the listing
         const listingId = req.params.id;
@@ -49,13 +51,13 @@ router.post("/listing/:id/book", async (req, res) => {
                `
         });
 
-        // req.flash("success","Booking confirmed! The owner has been notified");
+        req.flash("success","Booking confirmed! The owner has been notified");
         res.redirect(`/listing/${listingId}`);
 
     }catch(err){
-        // req.flash("error","Something went wrong while processing your booking");
+        req.flash("error","Something went wrong while processing your booking");
         res.redirect(`/listing/${req.params.id}`);
     }
-});
+}));
 
 module.exports = router;
