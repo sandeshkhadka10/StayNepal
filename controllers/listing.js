@@ -22,10 +22,6 @@ module.exports.indexRoute = (async (req, res) => {
 });
 
 module.exports.renderNewForm = (req, res) => {
-    // if(!req.isAuthenticated()){
-    //     req.flash("error","You must be logged in to create listing!");
-    //     return res.redirect("/login");
-    // }
     res.render("listings/new.ejs");
 }; 
 
@@ -101,14 +97,3 @@ module.exports.showListing = (async (req, res) => {
     }
     res.render("listings/show.ejs", {Listing});
 });
-
-// module.exports.showListingByCategory = (async(req,res)=>{
-//     let {category} = req.body;
-
-//     // If a category is selected filter it otherwise show all listing
-//     let filter = category?{category}:{};
-
-//     const listings = await listing.find(filter);
-
-//     res.render("listings/index.ejs",{listings});
-// });
