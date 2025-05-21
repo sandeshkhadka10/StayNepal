@@ -1,7 +1,7 @@
 const booking = require("../models/booking");
 const listing = require("../models/listing");
 const nodemailer = require("nodemailer");
-require('dotenv').config();
+// require('dotenv').config(); this is already done in app.js
 
 module.exports.renderBookingForm = async (req, res) => {
     const listingId = req.params.id;

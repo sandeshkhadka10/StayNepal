@@ -31,7 +31,6 @@ module.exports.createListing = (async (req,res,next) => {
         limit: 2
     })
     .send()
-
     // console.log(response.body.features[0].geometry);
     // res.send("done");
     
