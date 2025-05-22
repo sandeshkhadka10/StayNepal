@@ -3,13 +3,13 @@ const router = express.Router();
 const User = require("../models/user");
 const wrapAsync = require("../utils/wrapAsync");
 const passport = require("passport");
-const { saveRedirectUrl, validateUser } = require("../middleware");
+const { saveRedirectUrl,validateUser} = require("../middleware");
 const userController = require("../controllers/user");
 
 // for doing signup
 router.route("/signup")
     .get(userController.renderSignUpForm)
-    .post(wrapAsync(userController.createSignUp));
+    .post(validateUser,wrapAsync(userController.createSignUp));
 
 // for doing login
 router.route("/login")
@@ -26,7 +26,7 @@ router.get("/logout", userController.logout);
 // for forgetting and resetting the password
 router.route("/forgetPassword")
   .get(userController.renderForgetPasswordForm)
-  .post(validateUser,wrapAsync(userController.forgetPassword));
+  .post(wrapAsync(userController.forgetPassword));
 
 router.route("/resetPassword")
    .get(userController.renderResetPasswordForm)
