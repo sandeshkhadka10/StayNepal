@@ -33,3 +33,7 @@ module.exports.loginSchema = Joi.object({
     password: Joi.string().required()
 });
 
+// for forgetPassword
+module.exports.forgetPasswordSchema = Joi.object({
+    email: Joi.string().required()
+});
