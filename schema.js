@@ -20,9 +20,16 @@ module.exports.reviewSchema = Joi.object({
     }).required()
 });
 
-module.exports.userSchema = Joi.object({
+// for signup
+module.exports.signupSchema = Joi.object({
   username: Joi.string().required(),
   email: Joi.string().required(),
   password: Joi.string().required()
+});
+
+// for login
+module.exports.loginSchema = Joi.object({
+    username: Joi.string().required(),
+    password: Joi.string().required()
 });
 
