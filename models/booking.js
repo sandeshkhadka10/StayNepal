@@ -8,20 +8,25 @@ const bookingSchema = new Schema({
         required: true
     },
     name:{
-        type:String
+        type:String,
+        required: true
     },
     email:{
-        type:String
+        type:String,
+        required: true
     },
     contact:{
         type:Number,
-        match: /^(98|97)[0-9]{8}$/
+        match: /^(98|97)[0-9]{8}$/,
+        required: true
     },
     checkin:{
-        type:Date
+        type:Date,
+        required: true
     },
     checkout:{
-        type:Date
+        type:Date,
+        required: true
     }
 });
 

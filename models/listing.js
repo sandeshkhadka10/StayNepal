@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const {Schema} = mongoose;
 const review = require("./review.js");
+const { required } = require("joi");
 
 const listingSchema = new mongoose.Schema({
     title: {
@@ -8,25 +9,29 @@ const listingSchema = new mongoose.Schema({
         required: true
     },
     description: {
-        type: String
+        type: String,
+        required: true
     },
     image: {
         url: String,
         filename: String
     },   
     price: {
-        type: Number
+        type: Number,
+        required: true
     },
     location: {
         type: String,
+        required: true
     },
     country: {
-        type: String
+        type: String,
+        required: true
     },
     reviews:[
         {
             type: Schema.Types.ObjectId,
-            ref:"Review"
+            ref:"Review",
         }
     ],
     owner:{
@@ -47,10 +52,12 @@ const listingSchema = new mongoose.Schema({
     category:{
         type: String,
         enum: ["Airport","Budget","Bus-Park","Camping","City-Area","Domes","Eco-Friendly","Farms","Home-Stay","Lakes","Luxury","Mountains","River"],
+        required: true
     },
     contact:{
         type:Number,
-        match: /^(98|97)[0-9]{8}$/
+        match: /^(98|97)[0-9]{8}$/,
+        required: true
     }
 });
 
