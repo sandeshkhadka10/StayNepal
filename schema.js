@@ -1,5 +1,6 @@
 const Joi = require("joi");
 
+// for listing
 module.exports.listingSchema = Joi.object({
     listing: Joi.object({
         title: Joi.string().required(),
@@ -13,6 +14,7 @@ module.exports.listingSchema = Joi.object({
     }).required()
 });
 
+// for review
 module.exports.reviewSchema = Joi.object({
     review: Joi.object({
         rating: Joi.number().required().min(1).max(5),
@@ -41,4 +43,15 @@ module.exports.forgetPasswordSchema = Joi.object({
 // for resetPassword
 module.exports.resetPasswordSchema = Joi.object({
     newPassword: Joi.string().required()
+});
+
+// for booking
+module.exports.bookingSchema = Joi.object({
+    booking: Joi.object({
+        name: Joi.string().required(),
+        email: Joi.string().required(),
+        contact: Joi.number().required(),
+        checkin: Joi.date().required(),
+        checkout: Joi.date().required()
+    })
 });
