@@ -25,6 +25,10 @@ module.exports.indexRoute = (async (req, res) => {
         req.flash("error", `Soon the hotel will be added in these "${category}".`);
         return res.redirect("/listing");
     }
+    if (location && allListing.length === 0) {
+        req.flash("error", `Enter valid location to find the hotel in "${location}".`);
+        return res.redirect("/listing");
+    }
     res.render("listings/index.ejs", { allListing });
 });
 
