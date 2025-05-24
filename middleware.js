@@ -84,6 +84,16 @@ module.exports.validateForgetPassword = (req,res,next)=>{
     }
 }
 
+module.exports.validateResetPassword = (req,res,next)=>{
+    let {error} = resetPasswordSchema.validate(req.body);
+    if(error){
+        let errMsg = error.details.map((el)=>el.message).join(",");
+        throw new ExpressError(400,errMsg);
+    }else{
+        next();
+    }
+}
+
 // It is made for deleting the review by the valid author only
 module.exports.isReviewAuther = async(req,res,next)=>{
     let {id,reviewId} = req.params;

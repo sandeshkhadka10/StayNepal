@@ -37,3 +37,8 @@ module.exports.loginSchema = Joi.object({
 module.exports.forgetPasswordSchema = Joi.object({
     email: Joi.string().required()
 });
+
+// for resetPassword
+module.exports.resetPasswordSchema = Joi.object({
+    newPassword: Joi.string().required()
+});
