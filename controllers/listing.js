@@ -22,7 +22,7 @@ module.exports.indexRoute = (async (req, res) => {
 
     let allListing = await listing.find(filter);
     if (category && allListing.length === 0) {
-        req.flash("error", `Soon the hotel will be added in these "${category}".`);
+        req.flash("error", `Soon the hotel will be added in these "${category}" category.`);
         return res.redirect("/listing");
     }
     if (location && allListing.length === 0) {
