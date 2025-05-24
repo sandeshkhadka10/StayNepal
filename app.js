@@ -89,9 +89,9 @@ app.use((req,res,next)=>{
 });
 
 // route bhanda aagadi nai session rah flash lignu parcha
-app.use("/",userRouter);
 app.use("/listing",listingsRouter);
 app.use("/listing/:id/reviews",reviewsRouter);
+app.use("/",userRouter);
 app.use("/",bookingRouter);
 
 // It is done if somebody gives random url
