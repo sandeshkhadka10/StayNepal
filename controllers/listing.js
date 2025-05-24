@@ -8,16 +8,23 @@ module.exports.indexRoute = (async (req, res) => {
     let {category} = req.query;
     let {location} = req.query;
 
-    // If a category is selected filter it otherwise show all listing
-    let filter = category?{category}:{};
-    console.log(filter);
+    let filter = {};
 
+    // If a category is selected filter it otherwise show all listing
+    if(category){
+        filter.category = category;
+    }
+    
     // It is for providing the specific location based on the user input
     if(location){
         filter.location = location;
     }
 
     let allListing = await listing.find(filter);
+    if (category && allListing.length === 0) {
+        req.flash("error", `Soon the hotel will be added in these "${category}".`);
+        return res.redirect("/listing");
+    }
     res.render("listings/index.ejs", { allListing });
 });
 
