@@ -7,23 +7,21 @@
                 </div>
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
-                    <input type="text" name="listing[title]" placeholder="Add a catchy title" class="form-control"
-                        required>
+                    <input type="text" name="listing[title]" placeholder="Add a catchy title" class="form-control" id="title" required>
                     <div class="valid-feedback">Title Looks Good</div>
                     <div class="invalid-feedback">Please Fill Up Title</div>
                 </div>
 
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
-                    <textarea name="listing[description]" placeholder="enter description" class="form-control"
-                        required></textarea>
+                    <textarea name="listing[description]" placeholder="enter description" class="form-control" id="description" required></textarea>
                     <div class="valid-feedback">Description Looks Good</div>
                     <div class="invalid-feedback">Please Fill Up description</div>
                 </div>
 
                 <div class="mb-3">
                     <label for="image" class="form-label">Upload Listing Image</label>
-                    <input name="listing[image]" class="form-control" type="file" required>
+                    <input name="listing[image]" class="form-control" type="file" id="image" required>
                     <div class="valid-feedback">Valid Image URL</div>
                     <div class="invalid-feedback">Please Fill Up Image URL</div>
                 </div>
@@ -31,15 +29,15 @@
                 <div class="row">
                     <div class="mb-3 col-md-4">
                         <label for="price" class="form-label">Price</label>
-                        <input type="number" name="listing[price]" placeholder="1200" class="form-control" min="0" required>
+                        <input type="number" name="listing[price]" placeholder="1200" class="form-control" min="0" id="price"required>
                         <div class="valid-feedback">Valid Amount</div>
                         <div class="invalid-feedback">Please Fill Up Valid Price</div>
                     </div>
 
                     <div class="mb-3 col-md-8">
                         <label for="location" class="form-label">Location</label>
-                        <input type="text" name="listing[location]" placeholder="Kalanki, Kathmandu" class="form-control"
-                            required>
+                        <input type="text" name="listing[location]" placeholder="Kalanki, Kathmandu"
+                            class="form-control" id="location" required>
                         <div class="valid-feedback">Valid Location</div>
                         <div class="invalid-feedback">Please Fill Up Location</div>
                     </div>
@@ -48,8 +46,7 @@
                 <div class="row">
                     <div class="mb-3 col-md-4">
                         <label for="country" class="form-label">Country</label>
-                        <input type="text" name="listing[country]" placeholder="Nepal" class="form-control"
-                            required>
+                        <input type="text" name="listing[country]" placeholder="Nepal" class="form-control" id="country" required>
                         <div class="valid-feedback">Valid Country</div>
                         <div class="invalid-feedback">Please Fill Up Country</div>
                     </div>
@@ -57,35 +54,47 @@
                     <div class="mb-3 col-md-8">
                         <label for="contact" class="form-label">Contact Detail:</label>
                         <input type="tel" name="listing[contact]" placeholder="9865983210" class="form-control"
-                            pattern="^(98|97)[0-9]{8}$" required>
+                            pattern="^(98|97)[0-9]{8}$" id="contact" required>
                         <div class="valid-feedback">Valid Contact-Number</div>
                         <div class="invalid-feedback">Please Fill Up Proper Contact-Number </div>
                     </div>
 
                 </div>
-                
 
-                <div class="mb-3">
-                    <label class="form-label">Category</label>
-                    <select class="form-select form-control" name="listing[category]" required>
-                        <option value="" disabled selected>Open this to select the category</option>
-                        <option value="Airport">Airport</option>
-                        <option value="Budget">Budget</option>
-                        <option value="Bus-Park">Bus-Park</option>
-                        <option value="Camping">Camping</option>
-                        <option value="City-Area">City-Area</option>
-                        <option value="Domes">Domes</option>
-                        <option value="Eco-Friendly">Eco-Friendly</option>
-                        <option value="Farms">Farms</option>
-                        <option value="Home-Stay">Home-Stay</option>
-                        <option value="Lakes">Lakes</option>
-                        <option value="Luxury">Luxury</option>
-                        <option value="Mountains">Mountains</option>
-                        <option value="River-Side">River-Side</option>
-                    </select>
-                    <div class="valid-feedback">Valid Category</div>
-                    <div class="invalid-feedback">Please Fill Up Category</div>
+                <div class="row">
+                    <div class="mb-3 col-8">
+                        <label class="form-label">Category</label>
+                        <select class="form-select form-control" name="listing[category]" required>
+                            <option value="" disabled selected>Open this to select the category</option>
+                            <option value="Airport">Airport</option>
+                            <option value="Budget">Budget</option>
+                            <option value="Bus-Park">Bus-Park</option>
+                            <option value="Camping">Camping</option>
+                            <option value="City-Area">City-Area</option>
+                            <option value="Domes">Domes</option>
+                            <option value="Eco-Friendly">Eco-Friendly</option>
+                            <option value="Farms">Farms</option>
+                            <option value="Home-Stay">Home-Stay</option>
+                            <option value="Lakes">Lakes</option>
+                            <option value="Luxury">Luxury</option>
+                            <option value="Mountains">Mountains</option>
+                            <option value="River-Side">River-Side</option>
+                        </select>
+                        <div class="valid-feedback">Valid Category</div>
+                        <div class="invalid-feedback">Please Fill Up Category</div>
+                    </div>
+
+                    <div class="mb-3 col-4">
+                        <label for="rooms" class="form-label">Rooms Available</label>
+                        <input type="number" name="listing[rooms]" placeholder="1" class="form-control" id="rooms" min="1"required>
+                        <div class="valid-feedback">Valid Entry of Available Room No</div>
+                        <div class="invalid-feedback">Please Fill Up Available Room No</div>
+                    </div>
+
                 </div>
+
+
+
 
 
                 <div class="mb-3">
