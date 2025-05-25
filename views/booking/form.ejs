@@ -19,9 +19,27 @@
 
                 <div class="mb-3">
                     <label for="phone">Phone Number</label>
-                    <input type="text" class="form-control" name="booking[contact]" pattern="^(98|97)[0-9]{8}$" required>
+                    <input type="text" class="form-control" name="booking[contact]" pattern="^(98|97)[0-9]{8}$"
+                        required>
                     <div class="valid-feedback">Name Entered</div>
                     <div class="invalid-feedback">Please Fill Up Name</div>
+                </div>
+
+                <div class="row">
+                    <div class="mb-3 col-6">
+                        <label for="person">No of Person</label>
+                        <input type="number" class="form-control" name="booking[peopleno]" required>
+                        <div class="valid-feedback">No of Person Entered</div>
+                        <div class="invalid-feedback">Please Fill Up No Of Person</div>
+                    </div>
+
+                    <div class="mb-3 col-6">
+                        <label for="room">No of Room Needed</label>
+                        <input type="number" class="form-control" name="booking[roomneeded]" required>
+                        <div class="valid-feedback">No of Room Needed Entered</div>
+                        <div class="invalid-feedback">Please Fill Up No Of Room Needed</div>
+                    </div>
+
                 </div>
 
                 <div class="mb-3">

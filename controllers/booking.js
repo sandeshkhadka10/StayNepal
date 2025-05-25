@@ -37,6 +37,8 @@ module.exports.bookingForm = async (req, res) => {
                <p><strong>Guest: </strong> ${newBooking.name}</p>
                <p><strong>Email: </strong> ${newBooking.email}</p>
                <p><strong>Contact No: </strong> ${newBooking.contact}</p>
+               <p><strong>No of Person: </strong> ${newBooking.peopleno}</p>
+               <p><strong>No of Room Needed: </strong> ${newBooking.roomneeded}</p>
                <p><strong>Check-in Date: </strong> ${new Date(newBooking.checkin).toDateString()}</p>
                <p><strong>Check-out Date: </strong> ${new Date(newBooking.checkout).toDateString()}</p>
                `

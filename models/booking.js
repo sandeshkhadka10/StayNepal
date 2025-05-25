@@ -20,6 +20,14 @@ const bookingSchema = new Schema({
         match: /^(98|97)[0-9]{8}$/,
         required: true
     },
+    peopleno:{
+        type:Number,
+        required:true
+    },
+    roomneeded:{
+        type:Number,
+        required:true
+    },
     checkin:{
         type:Date,
         required: true
