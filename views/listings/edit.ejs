@@ -13,14 +13,14 @@
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
                     <input type="text" name="listing[title]" value="<%= editListing.title %>" class="form-control"
-                        required>
+                        id="title" required>
                     <div class="valid-feedback">Title Looks Good</div>
                     <div class="invalid-feedback">Please Fill Up Title</div>
                 </div>
 
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
-                    <textarea name="listing[description]" class="form-control"
+                    <textarea name="listing[description]" class="form-control" id="description"
                         required><%= editListing.description %></textarea>
                     <div class="valid-feedback">Description Looks Good</div>
                     <div class="invalid-feedback">Please Fill Up description</div>
@@ -32,8 +32,8 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="image" class="form-label">Upload New Image</label>
-                    <input name="listing[image]" class="form-control" type="file">
+                    <label class="image" class="form-label" for="image">Upload New Image</label>
+                    <input name="listing[image]" class="form-control" type="file" id="image">
                 </div>
 
                 <div class="row">
@@ -41,7 +41,7 @@
                     <div class="mb-3 col-md-4">
                         <label for="price" class="form-label">Price</label>
                         <input type="number" name="listing[price]" value="<%= editListing.price %>" class="form-control" min="0"
-                            required>
+                            id="price" required>
                         <div class="valid-feedback">Valid Amount</div>
                         <div class="invalid-feedback">Please Fill Up Valid Price</div>
                     </div>
@@ -49,7 +49,7 @@
                     <div class="mb-3 col-md-8">
                         <label for="location" class="form-label">Location</label>
                         <input type="text" name="listing[location]" value="<%= editListing.location %>"
-                            class="form-control" required>
+                            class="form-control" id="location" required>
                         <div class="valid-feedback">Valid Location</div>
                         <div class="invalid-feedback">Please Fill Up Location</div>
                     </div>
@@ -59,7 +59,7 @@
                 <div class="row">
                     <div class="mb-3 col-md-4">
                         <label for="country" class="form-label">Country</label>
-                        <input type="text" name="listing[country]" value="<%= editListing.country %>" class="form-control"
+                        <input type="text" name="listing[country]" value="<%= editListing.country %>" class="form-control" id="country"
                             required>
                         <div class="valid-feedback">Valid Country</div>
                         <div class="invalid-feedback">Please Fill Up Country</div>
@@ -68,7 +68,7 @@
                     <div class="mb-3 col-md-8">
                         <label for="contact" class="form-label">Contact Detail:</label>
                         <input type="tel" name="listing[contact]" value="<%= editListing.contact %>" class="form-control" pattern="^(98|97)[0-9]{8}$"
-                            required>
+                           id="contact" required>
                         <div class="valid-feedback">Valid Contact-Number</div>
                         <div class="invalid-feedback">Please Fill Up Contact-Number </div>
                     </div>
@@ -77,8 +77,8 @@
                 
 
                 <div class="mb-3">
-                    <label class="form-label">Category</label>
-                    <select class="form-select" name="listing[category]" required>
+                    <label class="form-label" for="category">Category</label>
+                    <select class="form-select" name="listing[category]" id="category" required>
                         <option selected><%= editListing.category %></option>
                         <option value="Airport">Airport</option>
                         <option value="Budget">Budget</option>
