@@ -11,6 +11,7 @@ module.exports.listingSchema = Joi.object({
         country: Joi.string().required(),
         category: Joi.string().valid("Airport","Budget","Bus-Park","Camping","City-Area","Domes","Eco-Friendly","Farms","Home-Stay","Lakes","Luxury","Mountains","River-Side").required(),
         contact: Joi.number().required(),
+        rooms: Joi.number().required().min(0)
     }).required()
 });
 
