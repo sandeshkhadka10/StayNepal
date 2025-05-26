@@ -12,7 +12,7 @@
 
                 <div class="mb-3">
                     <label for="email">Your Email</label>
-                    <input type="email" class="form-control" name="booking[email]" required>
+                    <input type="email" class="form-control" name="booking[email]" id="email" required>
                     <div class="valid-feedback">Email Entered</div>
                     <div class="invalid-feedback">Please Fill Up Email</div>
                 </div>
@@ -20,7 +20,7 @@
                 <div class="mb-3">
                     <label for="phone">Phone Number</label>
                     <input type="text" class="form-control" name="booking[contact]" pattern="^(98|97)[0-9]{8}$"
-                        required>
+                        id="phone" required>
                     <div class="valid-feedback">Name Entered</div>
                     <div class="invalid-feedback">Please Fill Up Name</div>
                 </div>
@@ -28,14 +28,14 @@
                 <div class="row">
                     <div class="mb-3 col-6">
                         <label for="person">No of Person</label>
-                        <input type="number" class="form-control" name="booking[peopleno]" required>
+                        <input type="number" class="form-control" name="booking[peopleno]" id="person" required>
                         <div class="valid-feedback">No of Person Entered</div>
                         <div class="invalid-feedback">Please Fill Up No Of Person</div>
                     </div>
 
                     <div class="mb-3 col-6">
                         <label for="room">No of Room Needed</label>
-                        <input type="number" class="form-control" name="booking[roomneeded]" required>
+                        <input type="number" class="form-control" name="booking[roomneeded]" id="room" required>
                         <div class="valid-feedback">No of Room Needed Entered</div>
                         <div class="invalid-feedback">Please Fill Up No Of Room Needed</div>
                     </div>
@@ -44,14 +44,14 @@
 
                 <div class="mb-3">
                     <label for="checkin">Check-in Date</label>
-                    <input type="date" class="form-control" name="booking[checkin]" required>
+                    <input type="date" class="form-control" name="booking[checkin]" id="checkin" required>
                     <div class="valid-feedback">Check-in Date Entered</div>
                     <div class="invalid-feedback">Please Fill Up Check-in Date</div>
                 </div>
 
                 <div class="mb-3">
                     <label for="checkout">Check-out Date</label>
-                    <input type="date" class="form-control" name="booking[checkout]" required>
+                    <input type="date" class="form-control" name="booking[checkout]" id="checkout" required>
                     <div class="valid-feedback">Check-out Date Entered</div>
                     <div class="invalid-feedback">Please Fill Up Check-out Date</div>
                 </div>
