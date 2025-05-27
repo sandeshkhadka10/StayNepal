@@ -11,8 +11,14 @@ router.route("/listing/:id/book")
 
 
 router.get("/listing/:id/bookinghistory",async (req,res)=>{
-  let bookingHistory = await booking.find();
-  res.render("booking/bookingHistory.ejs",{bookingHistory});
+  let {id} = req.params;
+  try{
+    let bookingHistory = await booking.find({listing:id});
+    res.render("booking/bookingHistory.ejs",{bookingHistory});
+  }catch(err){
+    res.flash("error","Failed to load the booking history");
+  }
+  
 });
 
 module.exports = router;
