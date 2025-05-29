@@ -63,3 +63,13 @@ module.exports.bookingForm = async (req, res) => {
 
     }
 };
+
+module.exports.bookingHistory = async (req, res) => {
+  let { id } = req.params;
+  let bookingHistory = await booking.find({ listing: id });
+  if (bookingHistory.length === 0) {
+    req.flash("error", "No Booking History Exists.");
+    return res.redirect(`/listing/${id}`);
+  }
+  res.render("booking/bookingHistory.ejs", { bookingHistory });
+};
