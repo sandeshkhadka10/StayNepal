@@ -20,6 +20,7 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 app.listen(8080, () => {
     console.log("Server is listening to port 8080");
@@ -77,6 +78,35 @@ app.use(flash());
 app.use(passport.initialize()); // A middleware that initalizes passport
 app.use(passport.session()); // req lai thahos kun wala session ko part bhanera tei bhayera use garnu parcha
 passport.use(new LocalStrategy(User.authenticate()));
+passport.use(new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: "/auth/google/callback",
+    passReqToCallback: true  // 👈 enables access to req
+  },
+  async function(req, accessToken, refreshToken, profile, done) {
+    try {
+      let user = await User.findOne({ googleId: profile.id });
+
+      if (user) {
+        // Flash-like message using session
+        req.session.message = `Welcome back, ${user.username}!`;
+        return done(null, user);
+      }
+
+      let newUser = new User({
+        username: profile.displayName,
+        googleId: profile.id,
+      });
+      await newUser.save();
+
+      req.session.message = `Account created for ${newUser.username}`;
+      done(null, newUser);
+    } catch (err) {
+      done(err, null);
+    }
+  }
+));
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
