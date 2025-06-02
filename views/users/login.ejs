@@ -1,34 +1,41 @@
 <% layout("/layouts/boilerplate") %>
-<div class="row mt-3">
-    <h1 class="col-6 offset-5">Login</h1>
-    <div class="col-6 offset-3">
-        <form method="post" action="/login" class="needs-validation" novalidate>
-            <div class="mb-3">
-                <label for="username" class="label-form">Username</label>
-                <input type="text" name="username" class="form-control" id="username" required>
-                <div class="valid-feedback">Username Entered</div>
-                <div class="invalid-feedback">Please Fill Up Username</div>
-            </div>
+    <div class="row mt-3">
+        <h1 class="col-6 offset-5">Login</h1>
+        <div class="col-6 offset-3">
+            <form method="post" action="/login" class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <label for="username" class="label-form">Username</label>
+                    <input type="text" name="username" class="form-control" id="username" required>
+                    <div class="valid-feedback">Username Entered</div>
+                    <div class="invalid-feedback">Please Fill Up Username</div>
+                </div>
 
-            <div class="mb-3">
-                <label for="password" class="label-form">Password</label>
-                <input type="password" name="password" class="form-control" id="password" required>
-                <div class="valid-feedback">Password Entered</div>
-                <div class="invalid-feedback">Please Fill Up Password</div>
-            </div>
+                <div class="mb-3">
+                    <label for="password" class="label-form">Password</label>
+                    <input type="password" name="password" class="form-control" id="password" required>
+                    <div class="valid-feedback">Password Entered</div>
+                    <div class="invalid-feedback">Please Fill Up Password</div>
+                </div>
 
-            <div class="mb-3">
-                <a href="/forgetPassword" style="text-decoration: none;">Forget Password?</a>
-            </div>
+                <div class="mb-3">
+                    <a href="/forgetPassword" style="text-decoration: none;">Forget Password?</a>
+                </div>
 
-            <div class="mb-3">
-                <a href="/signup" style="text-decoration: none;">Do you have an account? Signup</a>
-            </div>
+                <div class="mb-3">
+                    <a href="/signup" style="text-decoration: none;">Do you have an account? Signup</a>
+                </div>
 
-            <div class="text-center">
-                <button class="btn btn-success">Login</button>
-            </div>
-            
-        </form>
+                <div class="mb-3">
+                    <a href="/auth/google" class="btn btn-danger">
+                        <i class="fab fa-google"></i>  Sign in with Google
+                    </a>
+                </div>
+
+
+                <div class="text-center">
+                    <button class="btn btn-success">Login</button>
+                </div>
+
+            </form>
+        </div>
     </div>
-</div>

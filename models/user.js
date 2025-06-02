@@ -7,7 +7,12 @@ const userSchema = new Schema ({
         type: String,
         required: true,
         unique: true
-    }
+    },
+    googleId: {
+    type: String,
+    unique: true,
+    sparse: true // Allows null for users not using Google
+  }
 });
 // it automatically adds username, hashing, salting and hash passport 
 userSchema.plugin(passportLocalMongoose);
