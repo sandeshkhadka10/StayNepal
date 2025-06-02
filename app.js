@@ -79,28 +79,24 @@ app.use(passport.initialize()); // A middleware that initalizes passport
 app.use(passport.session()); // req lai thahos kun wala session ko part bhanera tei bhayera use garnu parcha
 passport.use(new LocalStrategy(User.authenticate()));
 passport.use(new GoogleStrategy({
-    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientID: process.env.GOOGLE_CLIENT_ID, // from Google Developer Console
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "/auth/google/callback",
-    passReqToCallback: true  // 👈 enables access to req
+    callbackURL: "/auth/google/callback"
   },
-  async function(req, accessToken, refreshToken, profile, done) {
+  async function(accessToken, refreshToken, profile, done) {
     try {
-      let user = await User.findOne({ googleId: profile.id });
-
-      if (user) {
-        // Flash-like message using session
-        req.session.message = `Welcome back, ${user.username}!`;
-        return done(null, user);
+      // Check if user exists in your DB
+      let existingUser = await User.findOne({ googleId: profile.id });
+      if (existingUser) {
+        return done(null, existingUser);
       }
-
+      // Else create new user
       let newUser = new User({
         username: profile.displayName,
         googleId: profile.id,
+        // email: profile.emails[0].value // if you need email
       });
       await newUser.save();
-
-      req.session.message = `Account created for ${newUser.username}`;
       done(null, newUser);
     } catch (err) {
       done(err, null);
