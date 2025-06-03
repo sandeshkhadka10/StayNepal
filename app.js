@@ -78,6 +78,7 @@ app.use(flash());
 app.use(passport.initialize()); // A middleware that initalizes passport
 app.use(passport.session()); // req lai thahos kun wala session ko part bhanera tei bhayera use garnu parcha
 passport.use(new LocalStrategy(User.authenticate()));
+
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID, // from Google Developer Console
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
@@ -94,7 +95,7 @@ passport.use(new GoogleStrategy({
       let newUser = new User({
         username: profile.displayName,
         googleId: profile.id,
-        // email: profile.emails[0].value // if you need email
+        email: profile.emails[0].value // if you need email
       });
       await newUser.save();
       done(null, newUser);
@@ -104,8 +105,10 @@ passport.use(new GoogleStrategy({
   }
 ));
 
+
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
 
 app.use((req,res,next)=>{
     res.locals.success = req.flash("success");
