@@ -78,41 +78,47 @@ app.use(flash());
 app.use(passport.initialize()); // A middleware that initalizes passport
 app.use(passport.session()); // req lai thahos kun wala session ko part bhanera tei bhayera use garnu parcha
 passport.use(new LocalStrategy(User.authenticate()));
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: "/auth/google/callback",
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        let email =
+          profile.emails?.[0]?.value || `google-${profile.id}@noemail.com`;
 
-passport.use(new GoogleStrategy({
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "/auth/google/callback"
-  },
-  async function(accessToken, refreshToken, profile, done) {
-    try {
-      // Debug print to check if email is available
-      console.log("Google profile:", profile);
+        // Step 1: Find by googleId
+        let existingUser = await User.findOne({ googleId: profile.id });
+        if (existingUser) return done(null, existingUser);
 
-      let email = profile.emails?.[0]?.value || `google-${profile.id}@noemail.com`;
+        // Step 2: Find by email and update googleId
+        let userByEmail = await User.findOne({ email });
+        if (userByEmail) {
+          userByEmail.googleId = profile.id;
+          await userByEmail.save();
+          return done(null, userByEmail);
+        }
 
-      let existingUser = await User.findOne({ googleId: profile.id });
+        // Step 3: Create new user
+        let newUser = new User({
+          username: profile.displayName, // ✅ Save displayName as username
+          googleId: profile.id,
+          email: email,
+        });
 
-      if (existingUser) {
-        return done(null, existingUser);
+        const savedUser = await newUser.save();
+        console.log("✅ Google user saved:", savedUser);
+        return done(null, savedUser);
+      } catch (err) {
+        console.error("❌ Error in Google strategy:", err);
+        return done(err, null);
       }
-
-      let newUser = new User({
-        username: profile.displayName,
-        googleId: profile.id,
-        email: email
-      });
-
-      await newUser.save();
-      done(null, newUser);
-
-    } catch (err) {
-      console.error("Error saving Google user:", err);
-      done(err, null);
     }
-  }
-));
-
+  )
+);
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -123,7 +129,7 @@ passport.deserializeUser(async (id, done) => {
     const user = await User.findById(id);
     done(null, user);
   } catch (err) {
-    done(err, null);
+    done(err);
   }
 });
 

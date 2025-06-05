@@ -2,18 +2,21 @@ const mongoose = require("mongoose");
 const {Schema} = mongoose;
 const passportLocalMongoose = require("passport-local-mongoose");
 
-const userSchema = new Schema ({
-    email:{
-        type: String,
-        required: true,
-        unique: true
-    },
-    googleId: {
+const userSchema = new Schema({
+  email: {
     type: String,
     unique: true,
-    sparse: true // Allows null for users not using Google
-  }
+    sparse: true // allow multiple nulls
+  },
+  googleId: {
+    type: String,
+    unique: true,
+    sparse: true
+  },
+  username: String
 });
+
+
 // it automatically adds username, hashing, salting and hash passport 
 userSchema.plugin(passportLocalMongoose);
 
