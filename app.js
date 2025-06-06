@@ -87,14 +87,14 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        let email =
+        console.log("✅ Google profile:", profile);
+
+        const email =
           profile.emails?.[0]?.value || `google-${profile.id}@noemail.com`;
 
-        // Step 1: Find by googleId
         let existingUser = await User.findOne({ googleId: profile.id });
         if (existingUser) return done(null, existingUser);
 
-        // Step 2: Find by email and update googleId
         let userByEmail = await User.findOne({ email });
         if (userByEmail) {
           userByEmail.googleId = profile.id;
@@ -102,36 +102,39 @@ passport.use(
           return done(null, userByEmail);
         }
 
-        // Step 3: Create new user
-        let newUser = new User({
-          username: profile.displayName, // ✅ Save displayName as username
-          googleId: profile.id,
+        const newUser = new User({
           email: email,
+          googleId: profile.id,
+          username: profile.displayName,
         });
 
-        const savedUser = await newUser.save();
-        console.log("✅ Google user saved:", savedUser);
+        const savedUser = await newUser.save().catch((err) => {
+          console.error("❌ Error while saving user:", err);
+        });
         return done(null, savedUser);
       } catch (err) {
-        console.error("❌ Error in Google strategy:", err);
+        console.error("❌ Error in Google Strategy:", err);
         return done(err, null);
       }
     }
   )
 );
 
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
+// passport.serializeUser((user, done) => {
+//   done(null, user.id);
+// });
 
-passport.deserializeUser(async (id, done) => {
-  try {
-    const user = await User.findById(id);
-    done(null, user);
-  } catch (err) {
-    done(err);
-  }
-});
+// passport.deserializeUser(async (id, done) => {
+//   try {
+//     const user = await User.findById(id);
+//     done(null, user);
+//   } catch (err) {
+//     done(err, null);
+//   }
+// });
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
