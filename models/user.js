@@ -6,8 +6,7 @@ const userSchema = new Schema({
   email: {
     type: String,
     unique: true,
-    // required: true,
-    sparse: true
+    required: true,
   },
   googleId: {
     type: String,
@@ -16,7 +15,11 @@ const userSchema = new Schema({
   }
 });
 
-userSchema.plugin(passportLocalMongoose);
+// this automatically handles the username, hashing and salting of password 
+userSchema.plugin(passportLocalMongoose,{
+  usernameFiled: "email", // this tells it to treat email as the username
+  usernameUnique: "false" // prevents it from creating a unique index on "username" 
+});
 
 const User = mongoose.model("User", userSchema);
 
