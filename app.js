@@ -87,10 +87,9 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        console.log("✅ Google profile:", profile);
+        // console.log("Google profile:", profile);
 
-        const email =
-          profile.emails?.[0]?.value || `google-${profile.id}@noemail.com`;
+        const email = profile.emails?.[0]?.value || `google-${profile.id}@noemail.com`;
 
         let existingUser = await User.findOne({ googleId: profile.id });
         if (existingUser) return done(null, existingUser);
@@ -109,11 +108,11 @@ passport.use(
         });
 
         const savedUser = await newUser.save().catch((err) => {
-          console.error("❌ Error while saving user:", err);
+          console.error("Error while saving user:", err);
         });
         return done(null, savedUser);
       } catch (err) {
-        console.error("❌ Error in Google Strategy:", err);
+        console.error("Error in Google Strategy:", err);
         return done(err, null);
       }
     }
