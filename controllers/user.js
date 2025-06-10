@@ -75,12 +75,9 @@ module.exports.forgetPassword = async (req, res) => {
             subject: "Reset Code",
             text: `Your password reset code is ${resetCode}`
         });
- 
-        req.flash("success", "Reset code sent");
-        res.redirect("/verifyCode");
-
-
-  res.redirect("/resetPassword");
+        
+    req.flash("success", "Reset code sent");
+    res.redirect("/verifyCode");
 };
 
 module.exports.renderResetPasswordForm = (req, res) => {
