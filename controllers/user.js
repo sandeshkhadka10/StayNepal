@@ -1,4 +1,13 @@
 const User = require("../models/user");
+const nodemailer = require("nodemailer");
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD,
+  },
+});
 
 module.exports.renderSignUpForm = (req, res) => {
   res.render("users/signup.ejs");
@@ -53,7 +62,24 @@ module.exports.forgetPassword = async (req, res) => {
     req.flash("error", "Email is not registered");
     return res.redirect("/forgetPassword");
   }
+
+  //   Generate 6-digit-code
+  const resetCode = Math.floor(100000 + Math.random() * 900000).toString();
   req.session.resetEmail = email;
+  req.session.resetCode = resetCode;
+
+  // sending code via email
+  await transporter.sendMail({
+            from: '"Reset Password" <reset@gmail.com>',
+            to: email,
+            subject: "Reset Code",
+            text: `Your password reset code is ${resetCode}`
+        });
+ 
+        req.flash("success", "Reset code sent");
+        res.redirect("/verifyCode");
+
+
   res.redirect("/resetPassword");
 };
 
