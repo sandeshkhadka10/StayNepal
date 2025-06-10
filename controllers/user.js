@@ -84,3 +84,7 @@ module.exports.resetPassword = (async(req,res)=>{
     res.redirect("/login");
 });
 
+module.exports.googleCallBack = (req, res) => {
+    // Successful auth, redirect somewhere
+    res.redirect("/listing");
+  }

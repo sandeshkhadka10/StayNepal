@@ -55,10 +55,7 @@ router.get(
 router.get(
   "/auth/google/callback",
   passport.authenticate("google", { failureRedirect: "/login" }),
-  (req, res) => {
-    // Successful auth, redirect somewhere
-    res.redirect("/listing");
-  }
+  userController.googleCallBack
 );
 
 module.exports = router;
