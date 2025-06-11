@@ -35,12 +35,34 @@ router
 // for doing logout
 router.get("/logout", userController.logout);
 
-// for forgetting and resetting the password
+// for forgetting the password
 router
   .route("/forgetPassword")
   .get(userController.renderForgetPasswordForm)
   .post(validateForgetPassword, wrapAsync(userController.forgetPassword));
 
+// for verfication of code
+router.get("/verifyCode",(req,res)=>{
+  if(!req.session.resetEmail){
+    res.flash("error","Session expired. Try again");
+    return res.redirect("/forgetPassword");
+  }
+  res.render("users/verifyCode.ejs");
+});
+
+router.post("/verifCode",(req,res)=>{
+  const {code} = req.body;
+
+  if(req.session.resetCode == code){
+    req.session.codeVerified = true;
+    return res.redirect("/resetPassword");
+  }
+
+  req.flash("error","Invalid Code. Try Again");
+  return res.redirect("/verifyCode");
+})
+ 
+// for reseting the password
 router
   .route("/resetPassword")
   .get(userController.renderResetPasswordForm)
@@ -57,5 +79,7 @@ router.get(
   passport.authenticate("google", { failureRedirect: "/login" }),
   userController.googleCallBack
 );
+
+
 
 module.exports = router;

@@ -55,6 +55,7 @@ module.exports.renderForgetPasswordForm = (req, res) => {
   res.render("users/forgetPassword.ejs");
 };
 
+// forgetting the password and sending the code to email
 module.exports.forgetPassword = async (req, res) => {
   let { email } = req.body;
   let user = await User.findOne({ email });
@@ -80,9 +81,12 @@ module.exports.forgetPassword = async (req, res) => {
     res.redirect("/verifyCode");
 };
 
+// here the work of verification is need to be done
+// for now it is done in the user router
+
 module.exports.renderResetPasswordForm = (req, res) => {
-  if (!req.session.resetEmail) {
-    req.flash("error", "Session expired. Try again.");
+  if (!req.session.resetEmail || !req.session.codeVerified) {
+    req.flash("error", "Unauthorized Access");
     return res.redirect("/forgetPassword");
   }
   res.render("users/resetPassword.ejs");
@@ -102,6 +106,9 @@ module.exports.resetPassword = async (req, res) => {
   await user.save();
 
   delete req.session.resetEmail;
+  delete req.session.resetCode;
+  delete req.session.codeVerified;
+
 
   req.flash("success", "Password updated successfully! Please log in.");
   res.redirect("/login");
