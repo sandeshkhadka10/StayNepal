@@ -50,7 +50,7 @@ router.get("/verifyCode",(req,res)=>{
   res.render("users/verifyCode.ejs");
 });
 
-router.post("/verifCode",(req,res)=>{
+router.post("/verifyCode",(req,res)=>{
   const {code} = req.body;
 
   if(req.session.resetCode == code){
@@ -60,7 +60,7 @@ router.post("/verifCode",(req,res)=>{
 
   req.flash("error","Invalid Code. Try Again");
   return res.redirect("/verifyCode");
-})
+});
  
 // for reseting the password
 router
