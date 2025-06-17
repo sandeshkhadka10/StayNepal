@@ -34,8 +34,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/bookmenow";
-// const dbUrl = process.env.ATLASDB_URL;
+// const MONGO_URL = "mongodb://127.0.0.1:27017/bookmenow";
+const dbUrl = process.env.ATLASDB_URL;
 main()
   .then(() => {
     console.log("Connected Successfully");
@@ -43,25 +43,25 @@ main()
   .catch((err) => console.log(err));
 
 async function main() {
-  await mongoose.connect(MONGO_URL);
+  await mongoose.connect(dbUrl);
 }
 
 // method that is used to create a new mongo store
 // yoh jaile pani mathi halne kina bhane session ma sessionOptions pass bhako cha
-// const store = MongoStore.create({
-//     mongoUrl: dbUrl,
-//     crypto:{
-//         secret: process.env.SECRET,
-//     },
-//     touchAfter: 24 * 3600,
-// });
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    crypto:{
+        secret: process.env.SECRET,
+    },
+    touchAfter: 24 * 3600,
+});
 
-// store.on("error",()=>{
-//     console.log("ERROR in MONGO SESSION STORE",err);
-// });
+store.on("error",()=>{
+    console.log("ERROR in MONGO SESSION STORE",err);
+});
 
 const sessionOptions = {
-  // store,
+  store,
   secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
