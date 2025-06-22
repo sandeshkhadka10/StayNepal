@@ -1,0 +1,19 @@
+<% layout("/layouts/boilerplate") %>
+<div class="row mt-3">
+    <h1 class="col-6 offset-5">Verify here</h1>
+    <div class="col-6 offset-3">
+        <form method="post" action="/verifyCode" class="needs-validation" novalidate>
+            <div class="mb-3">
+                <label for="code" class="label-form">Verification Code</label>
+                <input type="text" name="code" class="form-control" id="code" required>
+                <div class="valid-feedback">Verification Code Entered</div>
+                <div class="invalid-feedback">Please Fill Up Verification Code</div>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-success">Verify Now</button>
+            </div>
+            
+        </form>
+    </div>
+</div>

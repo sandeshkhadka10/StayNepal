@@ -1,4 +1,13 @@
 const User = require("../models/user");
+const nodemailer = require("nodemailer");
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD,
+  },
+});
 
 module.exports.renderSignUpForm = (req, res) => {
   res.render("users/signup.ejs");
@@ -46,6 +55,7 @@ module.exports.renderForgetPasswordForm = (req, res) => {
   res.render("users/forgetPassword.ejs");
 };
 
+// forgetting the password and sending the code to email
 module.exports.forgetPassword = async (req, res) => {
   let { email } = req.body;
   let user = await User.findOne({ email });
@@ -53,13 +63,30 @@ module.exports.forgetPassword = async (req, res) => {
     req.flash("error", "Email is not registered");
     return res.redirect("/forgetPassword");
   }
+
+  //   Generate 6-digit-code
+  const resetCode = Math.floor(100000 + Math.random() * 900000).toString();
   req.session.resetEmail = email;
-  res.redirect("/resetPassword");
+  req.session.resetCode = resetCode;
+
+  // sending code via email
+  await transporter.sendMail({
+            from: '"Reset Password" <reset@gmail.com>',
+            to: email,
+            subject: "Reset Code",
+            text: `Your password reset code is ${resetCode}`
+        });
+        
+    req.flash("success", "Reset code sent");
+    res.redirect("/verifyCode");
 };
 
+// here the work of verification is need to be done
+// for now it is done in the user router
+
 module.exports.renderResetPasswordForm = (req, res) => {
-  if (!req.session.resetEmail) {
-    req.flash("error", "Session expired. Try again.");
+  if (!req.session.resetEmail || !req.session.codeVerified) {
+    req.flash("error", "Unauthorized Access");
     return res.redirect("/forgetPassword");
   }
   res.render("users/resetPassword.ejs");
@@ -79,6 +106,9 @@ module.exports.resetPassword = async (req, res) => {
   await user.save();
 
   delete req.session.resetEmail;
+  delete req.session.resetCode;
+  delete req.session.codeVerified;
+
 
   req.flash("success", "Password updated successfully! Please log in.");
   res.redirect("/login");
