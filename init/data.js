@@ -4,154 +4,163 @@ const sampleListings = [
     description: "Relax at the peaceful shores of Phewa Lake.",
     image: {
       url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGFrZXN8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
-      filename: "lakeside1"
+      filename: "lakeside1",
     },
     price: 3500,
     location: "Lakeside, Pokhara",
     country: "Nepal",
     geometry: {
       type: "Point",
-      coordinates: [83.9616, 28.2096]
+      coordinates: [83.9616, 28.2096],
     },
     category: "Lakes",
-    contact: 9801234567
+    contact: 9801234567,
+    rooms: 15,
   },
   {
     title: "Everest Base Camp Domes",
     description: "Luxury domes facing Mount Everest.",
     image: {
       url: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bW91bnRhaW58ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
-      filename: "everest-domes"
+      filename: "everest-domes",
     },
     price: 15000,
     location: "Gorakshep, Solukhumbu",
     country: "Nepal",
     geometry: {
       type: "Point",
-      coordinates: [86.8569, 28.0026]
+      coordinates: [86.8569, 28.0026],
     },
     category: "Domes",
-    contact: 9812345678
+    contact: 9812345678,
+    rooms: 10,
   },
   {
     title: "Budget Stay at Kalanki",
     description: "Affordable rooms near Kalanki Bus Park.",
     image: {
       url: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YnVkZ2V0JTIwcm9vbXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
-      filename: "kalanki-budget"
+      filename: "kalanki-budget",
     },
     price: 1000,
     location: "Kalanki, Kathmandu",
     country: "Nepal",
     geometry: {
       type: "Point",
-      coordinates: [85.2802, 27.6935]
+      coordinates: [85.2802, 27.6935],
     },
     category: "Budget",
-    contact: 9823456789
+    contact: 9823456789,
+    rooms: 20,
   },
   {
     title: "Luxury Resort by Trishuli River",
     description: "Premium riverside resort with adventure sports.",
     image: {
       url: "https://images.unsplash.com/photo-1486308510493-cb44b04db5a9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cml2ZXIlMjByZXNvcnR8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
-      filename: "trishuli-resort"
+      filename: "trishuli-resort",
     },
     price: 12000,
     location: "Trishuli, Nuwakot",
     country: "Nepal",
     geometry: {
       type: "Point",
-      coordinates: [84.8607, 27.9832]
+      coordinates: [84.8607, 27.9832],
     },
-    category: "River",
-    contact: 9811223344
+    category: "River-Side",
+    contact: 9811223344,
+    rooms: 25,
   },
   {
     title: "Nagarkot Mountain Camping",
     description: "Tent experience with sunrise mountain views.",
     image: {
       url: "https://images.unsplash.com/photo-1500534623283-312aade485b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2FtcGluZ3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
-      filename: "nagarkot-camp"
+      filename: "nagarkot-camp",
     },
     price: 2000,
     location: "Nagarkot, Bhaktapur",
     country: "Nepal",
     geometry: {
       type: "Point",
-      coordinates: [85.5253, 27.7172]
+      coordinates: [85.5253, 27.7172],
     },
     category: "Camping",
-    contact: 9807654321
+    contact: 9807654321,
+    rooms: 12,
   },
   {
     title: "Bardiya Jungle Eco-Stay",
     description: "Eco-friendly lodge near Bardiya National Park.",
     image: {
       url: "https://images.unsplash.com/photo-1445820135878-ccab10e7c3e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZWNvJTIwYnVpbGRpbmd8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
-      filename: "bardiya-eco"
+      filename: "bardiya-eco",
     },
     price: 4000,
     location: "Thakurdwara, Bardiya",
     country: "Nepal",
     geometry: {
       type: "Point",
-      coordinates: [81.3531, 28.2430]
+      coordinates: [81.3531, 28.243],
     },
     category: "Eco-Friendly",
-    contact: 9819988776
+    contact: 9819988776,
+    rooms: 8,
   },
   {
     title: "Thamel Home Stay",
     description: "Local home-stay in the heart of Kathmandu.",
     image: {
       url: "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aG9tZXN0YXl8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
-      filename: "thamel-home"
+      filename: "thamel-home",
     },
     price: 2500,
     location: "Thamel, Kathmandu",
     country: "Nepal",
     geometry: {
       type: "Point",
-      coordinates: [85.3123, 27.7149]
+      coordinates: [85.3123, 27.7149],
     },
     category: "Home-Stay",
-    contact: 9803344556
+    contact: 9803344556,
+    rooms: 6,
   },
   {
     title: "Farm Living in Ilam",
     description: "Stay in the tea farms and experience rural life.",
     image: {
       url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZmFybXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
-      filename: "ilam-farm"
+      filename: "ilam-farm",
     },
     price: 3000,
     location: "Ilam Bazaar, Ilam",
     country: "Nepal",
     geometry: {
       type: "Point",
-      coordinates: [87.9266, 26.9117]
+      coordinates: [87.9266, 26.9117],
     },
     category: "Farms",
-    contact: 9816655443
+    contact: 9816655443,
+    rooms: 9,
   },
   {
     title: "Luxury City Retreat",
     description: "High-end suite in the capital’s heart.",
     image: {
       url: "https://images.unsplash.com/photo-1494526585095-c41746248156?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bHV4dXJ5JTIwaG90ZWx8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60",
-      filename: "kathmandu-luxury"
+      filename: "kathmandu-luxury",
     },
     price: 18000,
     location: "Durbar Marg, Kathmandu",
     country: "Nepal",
     geometry: {
       type: "Point",
-      coordinates: [85.3165, 27.7110]
+      coordinates: [85.3165, 27.711],
     },
     category: "Luxury",
-    contact: 9805566778
-  }
+    contact: 9805566778,
+    rooms: 18,
+  },
 ];
-  
+
 module.exports = { data: sampleListings };

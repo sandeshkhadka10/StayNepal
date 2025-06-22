@@ -1,12 +1,12 @@
-if(process.env.NODE_ENV != "production"){
-    require('dotenv').config();
+if (process.env.NODE_ENV != "production") {
+  require("dotenv").config();
 }
 // console.log(process.env.SECRET);
 
 const express = require("express");
 const app = express();
 const path = require("path");
-const methodOverride = require('method-override');
+const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
 const mongoose = require("mongoose");
@@ -15,14 +15,15 @@ const reviewsRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 const bookingRouter = require("./routes/booking.js");
 const session = require("express-session");
-const MongoStore = require('connect-mongo');
+const MongoStore = require("connect-mongo");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
 app.listen(8080, () => {
-    console.log("Server is listening to port 8080");
+  console.log("Server is listening to port 8080");
 });
 
 app.set("view engine", "ejs");
@@ -30,19 +31,19 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true }));
-app.use(methodOverride('_method'));
-app.engine('ejs', ejsMate);
+app.use(methodOverride("_method"));
+app.engine("ejs", ejsMate);
 
-const MONGO_URL = 'mongodb://127.0.0.1:27017/bookmenow';
+const MONGO_URL = "mongodb://127.0.0.1:27017/bookmenow";
 // const dbUrl = process.env.ATLASDB_URL;
 main()
-    .then(() => {
-        console.log("Connected Successfully");
-    })
-    .catch(err => console.log(err));
+  .then(() => {
+    console.log("Connected Successfully");
+  })
+  .catch((err) => console.log(err));
 
 async function main() {
-    await mongoose.connect(MONGO_URL);
+  await mongoose.connect(MONGO_URL);
 }
 
 // method that is used to create a new mongo store
@@ -59,17 +60,17 @@ async function main() {
 //     console.log("ERROR in MONGO SESSION STORE",err);
 // });
 
-const sessionOptions = ({
-    // store,
-    secret : process.env.SECRET,
-    resave : false,
-    saveUninitialized:true,
-    cookie:{
-        expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
-        maxAge: 7 * 24 * 60 * 60 * 1000,
-        httpOnly: true
-    }
-});
+const sessionOptions = {
+  // store,
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    httpOnly: true,
+  },
+};
 
 app.use(session(sessionOptions));
 app.use(flash());
@@ -77,30 +78,83 @@ app.use(flash());
 app.use(passport.initialize()); // A middleware that initalizes passport
 app.use(passport.session()); // req lai thahos kun wala session ko part bhanera tei bhayera use garnu parcha
 passport.use(new LocalStrategy(User.authenticate()));
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: "/auth/google/callback",
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        // console.log("Google profile:", profile);
+
+        const email = profile.emails?.[0]?.value || `google-${profile.id}@noemail.com`;
+
+        let existingUser = await User.findOne({ googleId: profile.id });
+        if (existingUser) return done(null, existingUser);
+
+        let userByEmail = await User.findOne({ email });
+        if (userByEmail) {
+          userByEmail.googleId = profile.id;
+          await userByEmail.save();
+          return done(null, userByEmail);
+        }
+
+        const newUser = new User({
+          email: email,
+          googleId: profile.id,
+          username: profile.displayName,
+        });
+
+        const savedUser = await newUser.save().catch((err) => {
+          console.error("Error while saving user:", err);
+        });
+        return done(null, savedUser);
+      } catch (err) {
+        console.error("Error in Google Strategy:", err);
+        return done(err, null);
+      }
+    }
+  )
+);
+
+// passport.serializeUser((user, done) => {
+//   done(null, user.id);
+// });
+
+// passport.deserializeUser(async (id, done) => {
+//   try {
+//     const user = await User.findById(id);
+//     done(null, user);
+//   } catch (err) {
+//     done(err, null);
+//   }
+// });
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.use((req,res,next)=>{
-    res.locals.success = req.flash("success");
-    res.locals.error = req.flash("error");
-    res.locals.currUser = req.user;
-    next();
+app.use((req, res, next) => {
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  res.locals.currUser = req.user;
+  next();
 });
 
 // route bhanda aagadi nai session rah flash lignu parcha
-app.use("/listing",listingsRouter);
-app.use("/listing/:id/reviews",reviewsRouter);
-app.use("/",userRouter);
-app.use("/",bookingRouter);
+app.use("/listing", listingsRouter);
+app.use("/listing/:id/reviews", reviewsRouter);
+app.use("/", userRouter);
+app.use("/", bookingRouter);
 
 // It is done if somebody gives random url
-app.all("*",(req,res,next)=>{
-    next(new ExpressError(404,"Page not found!"));
+app.all("*", (req, res, next) => {
+  next(new ExpressError(404, "Page not found!"));
 });
 
 // custom error handler
 app.use((err, req, res, next) => {
-    let{status = 500,message = "Something went wrong"} = err;
-    res.status(status).render("error.ejs",{message})
+  let { status = 500, message = "Something went wrong" } = err;
+  res.status(status).render("error.ejs", { message });
 });
