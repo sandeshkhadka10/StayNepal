@@ -1,49 +1,6 @@
+<link rel="stylesheet" href="/css/show.css">
+
 <% layout("/layouts/boilerplate") %>
-
-<style>
-    #map {
-        width: 100%;
-        height: 400px;
-        border-radius: 10px;
-    }
-
-    .show-card h3, .listing-card {
-        word-wrap: break-word;
-    }
-
-    @media (max-width: 768px) {
-        .listing-card,
-        .show-card,
-        .btns,
-        #map,
-        .col-8,
-        .col-6 {
-            margin-left: auto !important;
-            margin-right: auto !important;
-            width: 100% !important;
-            padding: 0 1rem;
-        }
-
-        .card.col-5 {
-            width: 100% !important;
-            margin-left: 0 !important;
-        }
-
-        .btns a,
-        .btns form {
-            display: inline-block;
-            margin: 5px 5px 0 0;
-        }
-
-        .offset-3 {
-            margin-left: 0 !important;
-        }
-
-        .starability-slot label {
-            font-size: 0.9rem;
-        }
-    }
-</style>
 
 <script>
     const mapToken = "<%= process.env.MAP_TOKEN %>";
@@ -62,14 +19,14 @@
             <p class="card-text"><b>Owned by: <i><%= Listing.owner.username %></i></b></p>
             <p class="card-text"><b>Description:</b> <%= Listing.description %></p>
             <p class="card-text"><b>Price:</b> &#8360; <%= Listing.price.toLocaleString("ne-NP") %> / night</p>
-            <p class="card-text"><b>Location:</b> <%= Listing.location %>,<%= Listing.country %> <i class="fa-solid fa-location-dot"></i></p>
+            <p class="card-text"><b>Location:</b> <%= Listing.location %></i></p>
+            <p class="card-text"><b>Country:</b> <%= Listing.country %></p>
             <p class="card-text"><b>Contact Detail:</b> <%= Listing.contact %></p>
         </div>
     </div>
 
     <p></p>
     
-
     <% if(currUser && currUser._id.equals(Listing.owner._id)){ %>
         <div class="btns col-8 offset-3">
             <a href="/listing/<%= Listing.id %>/edit" class="btn btn-dark edit-btn mt-3 m-1">Edit</a>
@@ -78,6 +35,7 @@
             </form>
         </div>
     <% } %>
+
     <hr>
 
     <!-- For Review Form -->

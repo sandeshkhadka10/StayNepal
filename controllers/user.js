@@ -17,7 +17,8 @@ module.exports.createSignUp = (async (req, res) => {
             res.redirect("/listing");
         });
     } catch (e) {
-        req.flash("error", e.message);
+        req.flash("error","Email is already in use");
+        // req.flash("error", e.message);
         res.redirect("/signup");
     }
 });
