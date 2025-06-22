@@ -22,9 +22,14 @@
             <p class="card-text"><b>Location:</b> <%= Listing.location %></i></p>
             <p class="card-text"><b>Country:</b> <%= Listing.country %></p>
             <p class="card-text"><b>Contact Detail:</b> <%= Listing.contact %></p>
+            <p class="card-text"><b>Available Rooms:</b> <%= Listing.rooms %></p>
         </div>
     </div>
-
+    
+    <div class="btns col-8 offset-3">
+        <a href="/listing/<%= Listing._id%>/book" class="btn btn-dark mt-3 m-1">BookNow</a>
+    </div>
+    
     <p></p>
     
     <% if(currUser && currUser._id.equals(Listing.owner._id)){ %>
@@ -32,6 +37,9 @@
             <a href="/listing/<%= Listing.id %>/edit" class="btn btn-dark edit-btn mt-3 m-1">Edit</a>
             <form method="post" action="/listing/<%= Listing.id %>?_method=DELETE" class="d-inline-block">
                 <button class="btn btn-dark mt-3 m-1">Delete</button>
+            </form>
+            <form method="get" action="/listing/<%= Listing.id %>/bookinghistory">
+                <button class="btn btn-info mt-3 m-1" style="color: white;">Booking History</button>
             </form>
         </div>
     <% } %>

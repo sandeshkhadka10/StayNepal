@@ -21,22 +21,9 @@ router.route("/:id")
     .patch(isLoggedIn, isOwner,upload.single('listing[image]'), validateListing, wrapAsync(listingController.updateListing))
     .delete(isLoggedIn, isOwner, wrapAsync(listingController.deleteListing));
 
-// Index Route
-// router.get("/", wrapAsync(listingController.indexRoute));
-
-// Create Route
-// router.post("/", isLoggedIn,validateListing, wrapAsync(listingController.createListing));
-
 // Edit Route
 router.get("/:id/edit", isLoggedIn, isOwner, wrapAsync(listingController.renderEditForm));
 
-// Update Route
-// router.patch("/:id", isLoggedIn, isOwner, validateListing, wrapAsync(listingController.updateListing));
-
-// Delete Route
-// router.delete("/:id", isLoggedIn, isOwner, wrapAsync(listingController.deleteListing));
-
-// Show Route
-// router.get("/:id", wrapAsync(listingController.showListing));
+// Note: If it contains different route path then do like new and edit route
 
 module.exports = router;

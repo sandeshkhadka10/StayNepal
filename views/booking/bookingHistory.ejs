@@ -1,0 +1,51 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+    .booking-history-container {
+        padding: 20px;
+    }
+
+    .booking-card {
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .booking-card p {
+        margin: 5px 0;
+        font-size: 16px;
+    }
+
+    .booking-card b {
+        color: #343a40;
+    }
+
+    .booking-card i {
+        color: #007bff;
+    }
+
+    .booking-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #17a2b8;
+    }
+</style>
+
+<div class="row booking-history-container">
+    <% for(let bookHis of bookingHistory){ %>
+        <div class="col-md-6 offset-md-3 booking-card">
+            <p class="booking-title">Booking Details</p>
+            <p class="card-text"><b>Guest: <i><%= bookHis.name %></i></b></p>
+            <p class="card-text"><b>Email:</b> <%= bookHis.email %></p>
+            <p class="card-text"><b>Contact No:</b> <%= bookHis.contact %></p>
+            <p class="card-text"><b>No of Person:</b> <%= bookHis.peopleno %></p>
+            <p class="card-text"><b>No of Room Needed:</b> <%= bookHis.roomneeded %></p>
+            <p class="card-text"><b>Check-in Date:</b> <%= bookHis.checkin %></p>
+            <p class="card-text"><b>Check-out Date:</b> <%= bookHis.checkout %></p>
+        </div>
+    <% } %>
+</div>

@@ -2,31 +2,40 @@ const listing = require("../models/listing");
 const mbxGeoCoding = require("@mapbox/mapbox-sdk/services/geocoding");
 const mapToken = process.env.MAP_TOKEN;
 const geocodingClient = mbxGeoCoding({ accessToken: mapToken });
+const booking = require("../models/booking");
 
-module.exports.indexRoute = async (req, res) => {
+module.exports.indexRoute = (async (req, res) => {
   let { category } = req.query;
   let { location } = req.query;
 
-  // If a category is selected filter it otherwise show all listing
-  let filter = category ? { category } : {};
-  console.log(filter);
+    let filter = {};
 
-  // It is for providing the specific location based on the user input
-  if (location) {
-    filter.location = location;
-  }
+    // If a category is selected filter it otherwise show all listing
+    if(category){
+        filter.category = category;
+    }
+    
+    // It is for providing the specific location based on the user input
+    if(location){
+        filter.location = location;
+    }
 
-  let allListing = await listing.find(filter);
-  res.render("listings/index.ejs", { allListing });
-};
+    let allListing = await listing.find(filter);
+    if (category && allListing.length === 0) {
+        req.flash("error", `Soon the hotel will be added in these "${category}" category.`);
+        return res.redirect("/listing");
+    }
+    if (location && allListing.length === 0) {
+        req.flash("error", `Enter valid location to find the hotel in "${location}".`);
+        return res.redirect("/listing");
+    }
+    res.render("listings/index.ejs", { allListing });
+});
 
 module.exports.renderNewForm = (req, res) => {
-  // if(!req.isAuthenticated()){
-  //     req.flash("error","You must be logged in to create listing!");
-  //     return res.redirect("/login");
-  // }
-  res.render("listings/new.ejs");
-};
+    res.render("listings/new.ejs");
+}; 
+
 
 module.exports.createListing = async (req, res, next) => {
   let response = await geocodingClient
@@ -34,10 +43,7 @@ module.exports.createListing = async (req, res, next) => {
       query: req.body.listing.location,
       limit: 2,
     })
-    .send();
 
-  // console.log(response.body.features[0].geometry);
-  // res.send("done");
 
   let url = req.file.path;
   let filename = req.file.filename;
@@ -92,26 +98,14 @@ module.exports.deleteListing = async (req, res) => {
   res.redirect("/listing");
 };
 
-module.exports.showListing = async (req, res) => {
-  let { id } = req.params;
-  const Listing = await listing
-    .findById(id)
-    .populate({ path: "reviews", populate: { path: "author" } })
-    .populate("owner");
-  if (!Listing) {
-    req.flash("error", "Listing you requested for does not exist!");
-    res.redirect("/listing");
-  }
-  res.render("listings/show.ejs", { Listing });
-};
 
-// module.exports.showListingByCategory = (async(req,res)=>{
-//     let {category} = req.body;
+module.exports.showListing = (async (req, res) => {
+    let { id } = req.params;
+    const Listing = await listing.findById(id).populate({path:"reviews", populate:{path:"author"}}).populate("owner");
+    if(!Listing){
+        req.flash("error","Listing you requested for does not exist!");
+        res.redirect("/listing");
+    }
+    res.render("listings/show.ejs", {Listing});
+});
 
-//     // If a category is selected filter it otherwise show all listing
-//     let filter = category?{category}:{};
-
-//     const listings = await listing.find(filter);
-
-//     res.render("listings/index.ejs",{listings});
-// });
