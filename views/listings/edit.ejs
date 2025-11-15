@@ -14,16 +14,16 @@
                     <label for="title" class="form-label">Title</label>
                     <input type="text" name="listing[title]" value="<%= editListing.title %>" class="form-control"
                         id="title" required>
-                    <div class="valid-feedback">Title Looks Good</div>
-                    <div class="invalid-feedback">Please Fill Up Title</div>
+                    <div class="valid-feedback">Title looks good</div>
+                    <div class="invalid-feedback">Please enter the title</div>
                 </div>
 
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
                     <textarea name="listing[description]" class="form-control" id="description"
                         required><%= editListing.description %></textarea>
-                    <div class="valid-feedback">Description Looks Good</div>
-                    <div class="invalid-feedback">Please Fill Up description</div>
+                    <div class="valid-feedback">Description looks good</div>
+                    <div class="invalid-feedback">Please enter the description</div>
                 </div>
 
                 <div class="mb-3">
@@ -43,15 +43,15 @@
                         <input type="number" name="listing[price]" value="<%= editListing.price %>" class="form-control"
                             min="0" id="price" required>
                         <div class="valid-feedback">Valid Amount</div>
-                        <div class="invalid-feedback">Please Fill Up Valid Price</div>
+                        <div class="invalid-feedback">Please enter the valid price</div>
                     </div>
 
                     <div class="mb-3 col-md-8">
                         <label for="location" class="form-label">Location</label>
                         <input type="text" name="listing[location]" value="<%= editListing.location %>"
                             class="form-control" id="location" required>
-                        <div class="valid-feedback">Valid Location</div>
-                        <div class="invalid-feedback">Please Fill Up Location</div>
+                        <div class="valid-feedback">Location name entered</div>
+                        <div class="invalid-feedback">Please enter the location</div>
                     </div>
 
                 </div>
@@ -61,8 +61,8 @@
                         <label for="country" class="form-label">Country</label>
                         <input type="text" name="listing[country]" value="<%= editListing.country %>"
                             class="form-control" id="country" required>
-                        <div class="valid-feedback">Valid Country</div>
-                        <div class="invalid-feedback">Please Fill Up Country</div>
+                        <div class="valid-feedback">Country name entered</div>
+                        <div class="invalid-feedback">Please enter the country name</div>
                     </div>
 
                     <div class="mb-3 col-md-8">
@@ -70,7 +70,7 @@
                         <input type="tel" name="listing[contact]" value="<%= editListing.contact %>"
                             class="form-control" pattern="^(98|97)[0-9]{8}$" id="contact" required>
                         <div class="valid-feedback">Valid Contact-Number</div>
-                        <div class="invalid-feedback">Please Fill Up Contact-Number </div>
+                        <div class="invalid-feedback">Please enter a valid contact-number </div>
                     </div>
 
                 </div>
@@ -96,15 +96,15 @@
                             <option value="Mountains">Mountains</option>
                             <option value="River-Side">River-Side</option>
                         </select>
-                        <div class="valid-feedback">Valid Country</div>
-                        <div class="invalid-feedback">Please Fill Up Country</div>
+                        <div class="valid-feedback">Valid Category</div>
+                        <div class="invalid-feedback">Please select the category</div>
                     </div>
 
                     <div class="mb-3 col-4">
                         <label for="rooms" class="form-label">Rooms Available</label>
                         <input type="number" name="listing[rooms]" placeholder="1" class="form-control" id="rooms" min="0" value="<%= editListing.rooms %>" required>
-                        <div class="valid-feedback">Valid Entry of Available Room No</div>
-                        <div class="invalid-feedback">Please Fill Up Available Room No</div>
+                        <div class="valid-feedback">Valid entry of available room no</div>
+                        <div class="invalid-feedback">Please enter the available room No</div>
                     </div>
                 </div>
 
