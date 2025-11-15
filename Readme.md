@@ -32,8 +32,8 @@ HTML, CSS, Bootstrap, JavaScript, EJS, Node.js, Express.js and MongoDB, this pro
 - **HTML**
 - **CSS**
 - **Bootstrap**
-- **JavaScript** (40%)
-- **EJS** (39.2%)
+- **JavaScript**
+- **EJS**
 - **Node.js**
 - **Express.js**
 - **MongoDB**
