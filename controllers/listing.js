@@ -43,6 +43,7 @@ module.exports.createListing = async (req, res, next) => {
       query: req.body.listing.location,
       limit: 2,
     })
+    .send();
 
 
   let url = req.file.path;
