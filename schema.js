@@ -10,7 +10,7 @@ module.exports.listingSchema = Joi.object({
         location: Joi.string().required(),
         country: Joi.string().required(),
         category: Joi.string().valid("Airport","Budget","Bus-Park","Camping","City-Area","Domes","Eco-Friendly","Farms","Home-Stay","Lakes","Luxury","Mountains","River-Side").required(),
-        contact: Joi.number().required(),
+        contact: Joi.string().pattern(/^(97|98)[0-9]{8}$/).required(),
         rooms: Joi.number().required().min(0)
     }).required()
 });
@@ -26,7 +26,7 @@ module.exports.reviewSchema = Joi.object({
 // for signup
 module.exports.signupSchema = Joi.object({
   username: Joi.string().required(),
-  email: Joi.string().required(),
+  email: Joi.string().email({ tlds: { allow: false } }).required(),
   password: Joi.string().required()
 });
 
@@ -38,7 +38,7 @@ module.exports.loginSchema = Joi.object({
 
 // for forgetPassword
 module.exports.forgetPasswordSchema = Joi.object({
-    email: Joi.string().required()
+     email: Joi.string().email({ tlds: { allow: false } }).required()
 });
 
 // for resetPassword
@@ -50,11 +50,11 @@ module.exports.resetPasswordSchema = Joi.object({
 module.exports.bookingSchema = Joi.object({
     booking: Joi.object({
         name: Joi.string().required(),
-        email: Joi.string().required(),
-        contact: Joi.number().required(),
+        email: Joi.string().email({ tlds: { allow: false } }).required(),
+        contact: Joi.string().pattern(/^(97|98)[0-9]{8}$/).required(),
         peopleno: Joi.number().required(),
-        roomneeded: Joi.number().required(),
+        roomneeded: Joi.number().required().min(1),
         checkin: Joi.date().required(),
         checkout: Joi.date().required()
-    })
+    }).required()
 });

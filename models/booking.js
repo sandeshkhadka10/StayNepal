@@ -16,8 +16,7 @@ const bookingSchema = new Schema({
         required: true
     },
     contact:{
-        type:Number,
-        match: /^(98|97)[0-9]{8}$/,
+        type:String,
         required: true
     },
     peopleno:{

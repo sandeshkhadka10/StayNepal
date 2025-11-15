@@ -55,8 +55,7 @@ const listingSchema = new mongoose.Schema({
         required: true
     },
     contact:{
-        type:Number,
-        match: /^(98|97)[0-9]{8}$/,
+        type:String,
         required: true
     },
     rooms:{
